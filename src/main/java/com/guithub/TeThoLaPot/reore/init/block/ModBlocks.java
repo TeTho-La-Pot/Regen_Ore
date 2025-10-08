@@ -2,7 +2,6 @@ package com.guithub.TeThoLaPot.reore.init.block;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.item.Items;
-import com.simibubi.create.AllBlocks;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -22,7 +21,7 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, RE_Ore.MOD_ID);
 
     public static final RegistryObject<Block> TEST_ORE = registerBlock("test_ore",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noLootTable()));
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noLootTable()));
 
 
     //鉄鉱石

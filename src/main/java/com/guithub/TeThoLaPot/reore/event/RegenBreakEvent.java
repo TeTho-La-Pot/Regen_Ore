@@ -4,29 +4,39 @@ import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils;
 import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
-import com.jozufozu.flywheel.core.GameStateRegistry;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.CreateBlockEntityBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Mod.EventBusSubscriber(modid = RE_Ore.MOD_ID)
-public class BreakEvent {
+public class RegenBreakEvent extends ModBlocks{
+    private CompoundTag tagData = new CompoundTag();
 
+//    public static List<BlockPos> getPositionList(CompoundTag tag) {
+//        List<BlockPos> list = new ArrayList<>();
+//        if(tag !=null) {
+//            if(!tag.contains("positionList")){
+//                tag.put("positionList,", new CompoundTag());
+//            }
+//            CompoundTag posTag = tag.getCompound("positionList");
+//            list.add(NbtUtils.readBlockPos(posTag.getCompound("location")));
+//        }
+//    return list;
+//    }
 
     @SubscribeEvent
     public static void blockBreak(BlockEvent.BreakEvent event) {
@@ -38,6 +48,8 @@ public class BreakEvent {
         ItemStack offHand = player.getOffhandItem();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
+
+
 
 
         if (player.isCreative()) {
@@ -367,27 +379,58 @@ public class BreakEvent {
                         event.setCanceled(true);
                     }
 
-                    //Create Ores
-                    if (ModList.get().isLoaded("create")) {
-                        if (state.is(AllBlocks.ZINC_ORE.get()) || state.is(ModBlocks.CREATE_ZINC_ORE_ENTITY.get())) {
-                            if (mainHand.isCorrectToolForDrops(state)) {
-                                state.getBlock().playerDestroy(player.level(), player, pos, state, null, mainHand);
-                                state.getBlock().popExperience(level, pos, event.getExpToDrop());
-                            }
-                            level.removeBlock(pos, false);
-                            level.setBlock(pos, ModBlocks.CREATE_ZINC_ORE_ENTITY.get().defaultBlockState(), 3);
-                            event.setCanceled(true);
-                        }
-                        if (state.is(AllBlocks.DEEPSLATE_ZINC_ORE.get()) || state.is(ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get())) {
-                            if (mainHand.isCorrectToolForDrops(state)) {
-                                state.getBlock().playerDestroy(player.level(), player, pos, state, null, mainHand);
-                                state.getBlock().popExperience(level, pos, event.getExpToDrop());
-                            }
-                            level.removeBlock(pos, false);
-                            level.setBlock(pos, ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get().defaultBlockState(), 3);
-                            event.setCanceled(true);
-                        }
+                    //破壊時のNBT登録お試しコード
+                    if (state.is(Blocks.STONE)) {
+                        CompoundTag regenPosTag = new CompoundTag();
+                        CompoundTag regenStateTag = new CompoundTag();
+
+//                        List<BlockPos> regenPosList = new ArrayList<>();
+//                        regenPosList.add(pos);
+//                        List<BlockState> regenStateList = new ArrayList<>();
+//                        regenStateList.add(state);
+
+                        regenStateTag.put("state_r", NbtUtils.writeBlockState(state));
+                        regenPosTag.put("pos_r", NbtUtils.writeBlockPos(pos));
+
+
+
+
+
+
+
+
+
+                    if (mainHand.isCorrectToolForDrops(state)) {
+                        state.getBlock().playerDestroy(player.level(), player, pos, state, null, mainHand);
+                        state.getBlock().popExperience(level, pos, event.getExpToDrop());
                     }
+                    level.removeBlock(pos, false);
+                    level.setBlock(pos, ModBlocks.TEST_ORE.get().defaultBlockState(), 3);
+                    event.setCanceled(true);
+                }
+
+
+                    //Create Ores
+//                    if (ModList.get().isLoaded("create")) {
+//                        if (state.is(AllBlocks.ZINC_ORE.get()) || state.is(ModBlocks.CREATE_ZINC_ORE_ENTITY.get())) {
+//                            if (mainHand.isCorrectToolForDrops(state)) {
+//                                state.getBlock().playerDestroy(player.level(), player, pos, state, null, mainHand);
+//                                state.getBlock().popExperience(level, pos, event.getExpToDrop());
+//                            }
+//                            level.removeBlock(pos, false);
+//                            level.setBlock(pos, ModBlocks.CREATE_ZINC_ORE_ENTITY.get().defaultBlockState(), 3);
+//                            event.setCanceled(true);
+//                        }
+//                        if (state.is(AllBlocks.DEEPSLATE_ZINC_ORE.get()) || state.is(ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get())) {
+//                            if (mainHand.isCorrectToolForDrops(state)) {
+//                                state.getBlock().playerDestroy(player.level(), player, pos, state, null, mainHand);
+//                                state.getBlock().popExperience(level, pos, event.getExpToDrop());
+//                            }
+//                            level.removeBlock(pos, false);
+//                            level.setBlock(pos, ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get().defaultBlockState(), 3);
+//                            event.setCanceled(true);
+//                        }
+//                    }
 //
 //                    //Mekanism Ores
 //                    if (ModList.get().isLoaded("mekanism")) {

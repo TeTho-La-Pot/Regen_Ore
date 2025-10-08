@@ -3,8 +3,6 @@ package com.guithub.TeThoLaPot.reore.init.block.OtherMod;
 import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.init.block.RegenOreBlocks;
 import com.guithub.TeThoLaPot.reore.item.Items;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.Create;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

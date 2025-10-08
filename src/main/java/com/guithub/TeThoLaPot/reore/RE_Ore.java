@@ -5,13 +5,13 @@ import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.init.entity.BlockEntities;
 import com.guithub.TeThoLaPot.reore.item.CreativeModTabs;
 import com.guithub.TeThoLaPot.reore.item.Items;
-import com.guithub.TeThoLaPot.reore.tag.RegenTags;
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.AllBlocks;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,7 +24,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-import java.rmi.registry.RegistryHandler;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(RE_Ore.MOD_ID)
 public class RE_Ore {
@@ -60,17 +61,6 @@ public class RE_Ore {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
         }
     }
-
-//    public void AddCreate() {
-//        if (ModList.get().isLoaded("create")) {
-//            AllBlocks.register();
-//        }
-//    }
-//
-//    public void AddMekanism() {
-//        if (ModList.get().isLoaded("mekanism")) {
-//        }
-//    }
 
 
     @SubscribeEvent

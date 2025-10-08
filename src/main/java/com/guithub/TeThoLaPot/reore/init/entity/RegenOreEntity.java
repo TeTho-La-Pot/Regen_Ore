@@ -2,9 +2,12 @@ package com.guithub.TeThoLaPot.reore.init.entity;
 
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
-import com.simibubi.create.AllBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -13,23 +16,34 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.ModList;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.*;
+import static net.minecraft.core.registries.Registries.BLOCK;
 
 public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
     private int ticks;
+    private BlockState savedState;
 
+    public RegenOreEntity(BlockPos Pos, BlockState State) {
+        super(BlockEntities.REGEN_ORE_ENTITY.get(), Pos, State);
+    }
 
-    public RegenOreEntity(BlockPos blockPos, BlockState blockState) {
-        super(BlockEntities.REGEN_ORE_ENTITY.get(), blockPos, blockState);
+    @Override
+    public void load(CompoundTag regenStateTag){
+        super.load(regenStateTag);
+        if (regenStateTag.contains("state_r")){
+            HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
+            this.savedState = NbtUtils.readBlockState(blockLookup, regenStateTag.getCompound("state_r"));
+        }
     }
 
     @Override
     public void tick() {
         BlockState state = getBlockState();
         BlockPos pos = getBlockPos();
+        HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
 
 
         if (this.level == null || this.level.isClientSide()) {
@@ -223,20 +237,29 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
             }
         }
 
-//Create
-
-        if (ModList.get().isLoaded("create")) {
-            if (state.is(ModBlocks.CREATE_ZINC_ORE_ENTITY.get())) {
-                if (this.ticks++ >= tickZinc) {
-                    this.level.setBlock(pos, AllBlocks.ZINC_ORE.get().defaultBlockState(), 3);
-                }
-            }
-            if (state.is(ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get())) {
-                if (this.ticks++ >= tickDZinc) {
-                    this.level.setBlock(pos, AllBlocks.DEEPSLATE_ZINC_ORE.get().defaultBlockState(), 3);
-                }
+        //TEST
+        if (state.is(ModBlocks.TEST_ORE.get())) {
+//            HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
+//            this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), regenStateTag.getCompound("state_r"));
+            if (this.ticks++ >= 100) {
+                this.level.setBlock(pos, savedState, 3);
             }
         }
+
+//Create
+
+//        if (ModList.get().isLoaded("create")) {
+//            if (state.is(ModBlocks.CREATE_ZINC_ORE_ENTITY.get())) {
+//                if (this.ticks++ >= tickZinc) {
+//                    this.level.setBlock(pos, AllBlocks.ZINC_ORE.get().defaultBlockState(), 3);
+//                }
+//            }
+//            if (state.is(ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get())) {
+//                if (this.ticks++ >= tickDZinc) {
+//                    this.level.setBlock(pos, AllBlocks.DEEPSLATE_ZINC_ORE.get().defaultBlockState(), 3);
+//                }
+//            }
+//        }
 
 //Mekanism
 
@@ -252,6 +275,14 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
 //                }
 //            }
 //        }
+    }
+
+    public void setSavedState(CompoundTag regenStateTag){
+        this.load(regenStateTag);
+    }
+
+    public void setSavedPos(CompoundTag regenPosTag){
+        this.load(regenPosTag);
     }
 
     @Override

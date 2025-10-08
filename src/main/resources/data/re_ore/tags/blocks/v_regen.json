@@ -19,7 +19,6 @@
     "minecraft:redstone_ore",
     "minecraft:deepslate_redstone_ore",
     "minecraft:nether_quartz_ore",
-    "create:zinc_ore",
-    "create:deepslate_zinc_ore"
+    "minecraft:stone"
   ]
 }
