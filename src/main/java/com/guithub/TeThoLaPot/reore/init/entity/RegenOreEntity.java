@@ -1,13 +1,13 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.tag.RegenCTags;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
+import com.guithub.TeThoLaPot.reore.event.RegenBreakEvent;
 import org.jetbrains.annotations.Nullable;
 
 import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.*;
@@ -30,17 +30,19 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
         super(BlockEntities.REGEN_ORE_ENTITY.get(), Pos, State);
     }
 
-    @Override
-    public void load(CompoundTag regenStateTag){
-        super.load(regenStateTag);
-        if (regenStateTag.contains("state_r")){
-            HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
-            this.savedState = NbtUtils.readBlockState(blockLookup, regenStateTag.getCompound("state_r"));
-        }
-    }
+//    @Override
+//    public void load(CompoundTag regenStateTag){
+//        super.saveAdditional(regenStateTag);
+//        if (this.savedState !=null){
+//            regenStateTag.put("state_r",NbtUtils.writeBlockState(this.savedState));
+//        }
+//    }
 
     @Override
     public void tick() {
+
+        CompoundTag re_tag = RegenCTags.getAndClearTag();
+
         BlockState state = getBlockState();
         BlockPos pos = getBlockPos();
         HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
@@ -239,8 +241,10 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
 
         //TEST
         if (state.is(ModBlocks.TEST_ORE.get())) {
+
+            CompoundTag testTag = new CompoundTag();
 //            HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
-//            this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), regenStateTag.getCompound("state_r"));
+            this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), re_tag.getCompound("state_r"));
             if (this.ticks++ >= 100) {
                 this.level.setBlock(pos, savedState, 3);
             }
@@ -275,14 +279,6 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
 //                }
 //            }
 //        }
-    }
-
-    public void setSavedState(CompoundTag regenStateTag){
-        this.load(regenStateTag);
-    }
-
-    public void setSavedPos(CompoundTag regenPosTag){
-        this.load(regenPosTag);
     }
 
     @Override

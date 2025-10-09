@@ -2,6 +2,8 @@ package com.guithub.TeThoLaPot.reore.event;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.entity.RegenOreEntity;
+import com.guithub.TeThoLaPot.reore.tag.RegenCTags;
 import com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils;
 import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
 import net.minecraft.core.BlockPos;
@@ -24,7 +26,6 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = RE_Ore.MOD_ID)
 public class RegenBreakEvent extends ModBlocks{
-    private CompoundTag tagData = new CompoundTag();
 
 //    public static List<BlockPos> getPositionList(CompoundTag tag) {
 //        List<BlockPos> list = new ArrayList<>();
@@ -41,6 +42,13 @@ public class RegenBreakEvent extends ModBlocks{
     @SubscribeEvent
     public static void blockBreak(BlockEvent.BreakEvent event) {
 
+
+
+        CompoundTag regenPosTag = new CompoundTag();
+        CompoundTag regenStateTag = new CompoundTag();
+
+
+
         LevelAccessor levelAccessor = event.getLevel();
         ServerLevel level = (ServerLevel) levelAccessor;
         Player player = event.getPlayer();
@@ -48,7 +56,6 @@ public class RegenBreakEvent extends ModBlocks{
         ItemStack offHand = player.getOffhandItem();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
-
 
 
 
@@ -381,8 +388,6 @@ public class RegenBreakEvent extends ModBlocks{
 
                     //破壊時のNBT登録お試しコード
                     if (state.is(Blocks.STONE)) {
-                        CompoundTag regenPosTag = new CompoundTag();
-                        CompoundTag regenStateTag = new CompoundTag();
 
 //                        List<BlockPos> regenPosList = new ArrayList<>();
 //                        regenPosList.add(pos);
@@ -392,11 +397,8 @@ public class RegenBreakEvent extends ModBlocks{
                         regenStateTag.put("state_r", NbtUtils.writeBlockState(state));
                         regenPosTag.put("pos_r", NbtUtils.writeBlockPos(pos));
 
-
-
-
-
-
+                        RegenCTags.setRegenTag(regenStateTag);
+                        RegenCTags.setRegenTag(regenPosTag);
 
 
 
