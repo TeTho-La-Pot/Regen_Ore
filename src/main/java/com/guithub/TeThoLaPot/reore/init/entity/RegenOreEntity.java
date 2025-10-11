@@ -2,6 +2,7 @@ package com.guithub.TeThoLaPot.reore.init.entity;
 
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.tag.RegenCTags;
+import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -12,6 +13,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,6 +27,7 @@ import static net.minecraft.core.registries.Registries.BLOCK;
 public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
     private int ticks;
     private BlockState savedState;
+    private BlockPos savedPos;
 
     public RegenOreEntity(BlockPos Pos, BlockState State) {
         super(BlockEntities.REGEN_ORE_ENTITY.get(), Pos, State);
@@ -45,6 +48,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
 
         BlockState state = getBlockState();
         BlockPos pos = getBlockPos();
+        ServerLevel serverLevel = (ServerLevel) level;
         HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
 
 
@@ -242,11 +246,19 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
         //TEST
         if (state.is(ModBlocks.TEST_ORE.get())) {
 
-            CompoundTag testTag = new CompoundTag();
+            RegenWorldTags worldTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
+                    RegenWorldTags::load,RegenWorldTags::new,"regen_world_tag"
+            );
+
+            CompoundTag testTag = worldTags.getDataTag();
 //            HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
-            this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), re_tag.getCompound("state_r"));
-            if (this.ticks++ >= 100) {
-                this.level.setBlock(pos, savedState, 3);
+            this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), testTag.getCompound("state_r"));
+            this.savedPos = NbtUtils.readBlockPos(testTag.getCompound("pos_r"));
+
+            if (this.ticks++ >= 50) {
+                this.level.setBlock(savedPos, savedState, 3);
+//                System.out.println(savedState);
+//                System.out.println(savedPos);
             }
         }
 

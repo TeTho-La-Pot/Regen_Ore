@@ -4,6 +4,7 @@ import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.init.entity.RegenOreEntity;
 import com.guithub.TeThoLaPot.reore.tag.RegenCTags;
+import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
 import com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils;
 import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
 import net.minecraft.core.BlockPos;
@@ -44,8 +45,8 @@ public class RegenBreakEvent extends ModBlocks{
 
 
 
-        CompoundTag regenPosTag = new CompoundTag();
-        CompoundTag regenStateTag = new CompoundTag();
+        CompoundTag newRegenTag = new CompoundTag();
+
 
 
 
@@ -389,16 +390,25 @@ public class RegenBreakEvent extends ModBlocks{
                     //破壊時のNBT登録お試しコード
                     if (state.is(Blocks.STONE)) {
 
+                        RegenWorldTags worldTags = level.getDataStorage().computeIfAbsent(
+                                RegenWorldTags::load,RegenWorldTags::new,"regen_world_tag"
+                        );
+
+                        CompoundTag currentRegenTag = worldTags.getDataTag();
+
 //                        List<BlockPos> regenPosList = new ArrayList<>();
 //                        regenPosList.add(pos);
 //                        List<BlockState> regenStateList = new ArrayList<>();
 //                        regenStateList.add(state);
 
-                        regenStateTag.put("state_r", NbtUtils.writeBlockState(state));
-                        regenPosTag.put("pos_r", NbtUtils.writeBlockPos(pos));
+                        newRegenTag.put("state_r", NbtUtils.writeBlockState(state));
+                        newRegenTag.put("pos_r", NbtUtils.writeBlockPos(pos));
+                        currentRegenTag.merge(newRegenTag);
 
-                        RegenCTags.setRegenTag(regenStateTag);
-                        RegenCTags.setRegenTag(regenPosTag);
+                        worldTags.setDataTag(newRegenTag);
+                        RegenCTags.setRegenTag(newRegenTag);
+
+                        System.out.println(currentRegenTag);
 
 
 
