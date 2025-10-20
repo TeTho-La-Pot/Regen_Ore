@@ -30,6 +30,16 @@ public class RegenTags {
         public static final TagKey<Block> D_PRESET_08 = tag("d_preset08");
         public static final TagKey<Block> D_PRESET_09 = tag("d_preset09");
         public static final TagKey<Block> D_PRESET_10 = tag("d_preset10");
+        public static final TagKey<Block> N_PRESET_01 = tag("n_preset01");
+        public static final TagKey<Block> N_PRESET_02 = tag("n_preset02");
+        public static final TagKey<Block> N_PRESET_03 = tag("n_preset03");
+        public static final TagKey<Block> N_PRESET_04 = tag("n_preset04");
+        public static final TagKey<Block> N_PRESET_05 = tag("n_preset05");
+        public static final TagKey<Block> N_PRESET_06 = tag("n_preset06");
+        public static final TagKey<Block> N_PRESET_07 = tag("n_preset07");
+        public static final TagKey<Block> N_PRESET_08 = tag("n_preset08");
+        public static final TagKey<Block> N_PRESET_09 = tag("n_preset09");
+        public static final TagKey<Block> N_PRESET_10 = tag("n_preset10");
 
 
         private static TagKey<Block> tag(String name){

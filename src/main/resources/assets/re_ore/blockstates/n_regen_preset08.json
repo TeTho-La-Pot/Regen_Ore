@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "re_ore:block/n_regen_preset08"
+    }
+  }
+}

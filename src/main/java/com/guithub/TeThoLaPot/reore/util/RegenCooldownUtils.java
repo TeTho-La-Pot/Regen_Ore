@@ -25,4 +25,15 @@ public class RegenCooldownUtils {
     public static float d_preset08 = RegenOreCommonConfig.D_REGEN_PRESET_08.get();
     public static float d_preset09 = RegenOreCommonConfig.D_REGEN_PRESET_09.get();
     public static float d_preset10 = RegenOreCommonConfig.D_REGEN_PRESET_10.get();
+
+    public static float n_preset01 = RegenOreCommonConfig.N_REGEN_PRESET_01.get();
+    public static float n_preset02 = RegenOreCommonConfig.N_REGEN_PRESET_02.get();
+    public static float n_preset03 = RegenOreCommonConfig.N_REGEN_PRESET_03.get();
+    public static float n_preset04 = RegenOreCommonConfig.N_REGEN_PRESET_04.get();
+    public static float n_preset05 = RegenOreCommonConfig.N_REGEN_PRESET_05.get();
+    public static float n_preset06 = RegenOreCommonConfig.N_REGEN_PRESET_06.get();
+    public static float n_preset07 = RegenOreCommonConfig.N_REGEN_PRESET_07.get();
+    public static float n_preset08 = RegenOreCommonConfig.N_REGEN_PRESET_08.get();
+    public static float n_preset09 = RegenOreCommonConfig.N_REGEN_PRESET_09.get();
+    public static float n_preset10 = RegenOreCommonConfig.N_REGEN_PRESET_10.get();
 }

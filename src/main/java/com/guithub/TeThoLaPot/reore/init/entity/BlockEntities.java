@@ -37,7 +37,17 @@ public class BlockEntities {
                             ModBlocks.D_REGEN_PRESET07.get(),
                             ModBlocks.D_REGEN_PRESET08.get(),
                             ModBlocks.D_REGEN_PRESET09.get(),
-                            ModBlocks.D_REGEN_PRESET10.get()
+                            ModBlocks.D_REGEN_PRESET10.get(),
+                            ModBlocks.N_REGEN_PRESET01.get(),
+                            ModBlocks.N_REGEN_PRESET02.get(),
+                            ModBlocks.N_REGEN_PRESET03.get(),
+                            ModBlocks.N_REGEN_PRESET04.get(),
+                            ModBlocks.N_REGEN_PRESET05.get(),
+                            ModBlocks.N_REGEN_PRESET06.get(),
+                            ModBlocks.N_REGEN_PRESET07.get(),
+                            ModBlocks.N_REGEN_PRESET08.get(),
+                            ModBlocks.N_REGEN_PRESET09.get(),
+                            ModBlocks.N_REGEN_PRESET10.get()
 
                             ).build(null));
 

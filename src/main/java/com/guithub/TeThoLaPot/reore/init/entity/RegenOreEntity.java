@@ -315,6 +315,137 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 }
             }
 
+            if (state.is(ModBlocks.N_REGEN_PRESET01.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_1"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_1"));
+                if (this.ticks >= n_preset01 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset01 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET02.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_2"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_2"));
+                if (this.ticks >= n_preset02 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset02 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET03.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_3"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_3"));
+                if (this.ticks >= n_preset03 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset03 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET04.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_4"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_4"));
+                if (!(this.ticks < n_preset04) && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset04 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET05.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_5"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_5"));
+                if (this.ticks >= n_preset05 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset05 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET06.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_6"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_6"));
+                if (this.ticks >= n_preset06 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset06 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET07.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_7"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_7"));
+                if (this.ticks >= n_preset07 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset07 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET08.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_8"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_8"));
+                if (this.ticks >= n_preset08 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset08 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET09.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_9"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_9"));
+                if (this.ticks >= n_preset09 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset09 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.N_REGEN_PRESET10.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_10"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_10"));
+                if (this.ticks >= n_preset10 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= n_preset10 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+
                 if (testList.isEmpty()) {
                     testList.remove("regen_block_list");
             }

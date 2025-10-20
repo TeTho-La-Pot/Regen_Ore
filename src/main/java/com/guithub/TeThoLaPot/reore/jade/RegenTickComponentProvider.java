@@ -17,6 +17,7 @@ import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.*;
+import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.n_preset10;
 
 public enum RegenTickComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     INSTANCE;
@@ -98,6 +99,36 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
         }
         if (state.is(ModBlocks.D_REGEN_PRESET10.get())){
             data.putInt("Tick", (int) (100 / d_preset10 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET01.get())){
+            data.putInt("Tick", (int) (100 / n_preset01 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET02.get())){
+            data.putInt("Tick", (int) (100 / n_preset02 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET03.get())){
+            data.putInt("Tick", (int) (100 / n_preset03 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET04.get())){
+            data.putInt("Tick", (int) (100 / n_preset04 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET05.get())){
+            data.putInt("Tick", (int) (100 / n_preset05 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET06.get())){
+            data.putInt("Tick", (int) (100 / n_preset06 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET07.get())){
+            data.putInt("Tick", (int) (100 / n_preset07 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET08.get())){
+            data.putInt("Tick", (int) (100 / n_preset08 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET09.get())){
+            data.putInt("Tick", (int) (100 / n_preset09 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.N_REGEN_PRESET10.get())){
+            data.putInt("Tick", (int) (100 / n_preset10 * tickale.ticker()));
         }
     }
 

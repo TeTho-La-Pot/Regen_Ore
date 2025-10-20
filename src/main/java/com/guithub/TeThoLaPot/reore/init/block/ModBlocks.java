@@ -86,6 +86,37 @@ public class ModBlocks {
     public static final RegistryObject<Block> D_REGEN_PRESET10 = registerBlock("d_regen_preset10",
             () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).noLootTable()));
 
+    //Nether Skins
+    public static final RegistryObject<Block> N_REGEN_PRESET01 = registerBlock("n_regen_preset01",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET02 = registerBlock("n_regen_preset02",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET03 = registerBlock("n_regen_preset03",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET04 = registerBlock("n_regen_preset04",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET05 = registerBlock("n_regen_preset05",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET06 = registerBlock("n_regen_preset06",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET07 = registerBlock("n_regen_preset07",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET08 = registerBlock("n_regen_preset08",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET09 = registerBlock("n_regen_preset09",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
+    public static final RegistryObject<Block> N_REGEN_PRESET10 = registerBlock("n_regen_preset10",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name,toReturn);
