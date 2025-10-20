@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "": {
-      "model": "re_ore:block/mekanism_regen_fluorite_ore",
-      "uvlock": true
-    }
-  }
-}

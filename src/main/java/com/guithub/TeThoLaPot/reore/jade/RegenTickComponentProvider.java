@@ -35,102 +35,69 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
     public void appendServerData(CompoundTag data, BlockAccessor accessor) {
         TickaleBlockEntity tickale = (TickaleBlockEntity) accessor.getBlockEntity();
         BlockState state = accessor.getBlockState();
-        if (state.is(ModBlocks.REGEN_IRON_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickIron * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_IRON_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDIron * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_COPPER_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickCopper * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_COPPER_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDCopper * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_GOLD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickGold * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_GOLD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDGold * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_NETHER_GOLD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickNGold * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DIAMOND_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDiamond * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_DIAMOND_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDDiamond * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_EMERALD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickEmerald * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_EMERALD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDEmerald * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_COAL_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickCoal * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_COAL_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDCoal * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_LAPIS_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickLapis * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_LAPIS_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDLapis * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_REDSTONE_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickRedstone * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_DEEPSLATE_REDSTONE_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDRedstone * tickale.ticker()));
-        }else if (state.is(ModBlocks.REGEN_NETHER_QUARTZ_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickNQuartz * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_IRON_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickIron * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_IRON_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDIron * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_COPPER_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickCopper * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_COPPER_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDCopper * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_GOLD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickGold * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_GOLD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDGold * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_NETHER_GOLD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickNGold * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DIAMOND_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDiamond * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_DIAMOND_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDDiamond * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_EMERALD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickEmerald * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_EMERALD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDEmerald * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_COAL_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickCoal * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_COAL_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDCoal * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_LAPIS_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickLapis * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_LAPIS_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDLapis * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_REDSTONE_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickRedstone * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_DEEPSLATE_REDSTONE_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickDRedstone * tickale.ticker()));
-        }else if (state.is(ModBlocks.V_REGEN_NETHER_QUARTZ_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickNQuartz * tickale.ticker()));
-        }else if (state.is(ModBlocks.CREATE_ZINC_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickZinc * tickale.ticker()));
-        }else if (state.is(ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickDZinc * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_TIN_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickTin * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_DEEPSLATE_TIN_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickDTin * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_OSUMIUM_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickOsumium * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_DEEPSLATE_OSUMIUM_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickDOsumium * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_URANIUM_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickUranium * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_DEEPSLATE_URANIUM_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickDUranium * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_FLUORITE_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickFluorite * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_DEEPSLATE_FLUORITE_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickDFluorite * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_LEAD_ORE_ENTITY.get())){
-            data.putInt("Tick", (int) (100 / tickLead * tickale.ticker()));
-        }else if (state.is(ModBlocks.MEKANISM_DEEPSLATE_LEAD_ORE_ENTITY.get())) {
-            data.putInt("Tick", (int) (100 / tickDLead * tickale.ticker()));
+
+        if (state.is(ModBlocks.TEST_ORE.get())){
+            data.putInt("Tick", (int) (100 / preset01 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET01.get())){
+            data.putInt("Tick", (int) (100 / preset01 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET02.get())){
+            data.putInt("Tick", (int) (100 / preset02 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET03.get())){
+            data.putInt("Tick", (int) (100 / preset03 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET04.get())){
+            data.putInt("Tick", (int) (100 / preset04 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET05.get())){
+            data.putInt("Tick", (int) (100 / preset05 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET06.get())){
+            data.putInt("Tick", (int) (100 / preset06 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET07.get())){
+            data.putInt("Tick", (int) (100 / preset07 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET08.get())){
+            data.putInt("Tick", (int) (100 / preset08 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET09.get())){
+            data.putInt("Tick", (int) (100 / preset09 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.REGEN_PRESET10.get())){
+            data.putInt("Tick", (int) (100 / preset10 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET01.get())){
+            data.putInt("Tick", (int) (100 / d_preset01 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET02.get())){
+            data.putInt("Tick", (int) (100 / d_preset02 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET03.get())){
+            data.putInt("Tick", (int) (100 / d_preset03 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET04.get())){
+            data.putInt("Tick", (int) (100 / d_preset04 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET05.get())){
+            data.putInt("Tick", (int) (100 / d_preset05 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET06.get())){
+            data.putInt("Tick", (int) (100 / d_preset06 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET07.get())){
+            data.putInt("Tick", (int) (100 / d_preset07 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET08.get())){
+            data.putInt("Tick", (int) (100 / d_preset08 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET09.get())){
+            data.putInt("Tick", (int) (100 / d_preset09 * tickale.ticker()));
+        }
+        if (state.is(ModBlocks.D_REGEN_PRESET10.get())){
+            data.putInt("Tick", (int) (100 / d_preset10 * tickale.ticker()));
         }
     }
 

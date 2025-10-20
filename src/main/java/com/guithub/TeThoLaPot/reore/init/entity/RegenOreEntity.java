@@ -1,13 +1,13 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
-import com.guithub.TeThoLaPot.reore.tag.RegenCTags;
+import com.guithub.TeThoLaPot.reore.tag.RegenTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
@@ -18,287 +18,313 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import com.guithub.TeThoLaPot.reore.event.RegenBreakEvent;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
-
 import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.*;
-import static net.minecraft.core.registries.Registries.BLOCK;
 
 public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
     private int ticks;
     private BlockState savedState;
     private BlockPos savedPos;
+//    private BlockState savedState0;
+//    private BlockPos savedPos0;
 
     public RegenOreEntity(BlockPos Pos, BlockState State) {
         super(BlockEntities.REGEN_ORE_ENTITY.get(), Pos, State);
     }
 
-//    @Override
-//    public void load(CompoundTag regenStateTag){
-//        super.saveAdditional(regenStateTag);
-//        if (this.savedState !=null){
-//            regenStateTag.put("state_r",NbtUtils.writeBlockState(this.savedState));
-//        }
-//    }
-
     @Override
     public void tick() {
+        this.ticks++;
 
-        CompoundTag re_tag = RegenCTags.getAndClearTag();
+        BlockState state = this.getBlockState();
+        BlockPos pos = this.getBlockPos();
+        RegenWorldTags worldTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
+                RegenWorldTags::load,RegenWorldTags::new,"regen_world_tag");
 
-        BlockState state = getBlockState();
-        BlockPos pos = getBlockPos();
-        ServerLevel serverLevel = (ServerLevel) level;
-        HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
+        ListTag testList = worldTags.getRegenBlockList();
 
+        for (int i = testList.size() - 1; i >= 0; i--){
+            CompoundTag stateTag = testList.getCompound(i);
+            CompoundTag posTag = testList.getCompound(i);
 
         if (this.level == null || this.level.isClientSide()) {
             this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
             return;
         }
 
-//追加鉱石
+            if (state.is(ModBlocks.REGEN_PRESET01.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_1"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_1"));
+                if (this.ticks >= preset01 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset01 + 10) {
+                            this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                        }
+                    }
+                }
+            if (state.is(ModBlocks.REGEN_PRESET02.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_2"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_2"));
+                if (this.ticks >= preset02 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset02 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET03.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_3"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_3"));
+                if (this.ticks >= preset03 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset03 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET04.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_4"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_4"));
+                if (this.ticks >= preset04 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset04 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET05.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_5"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_5"));
+                if (this.ticks >= preset05 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset05 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET06.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_6"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_6"));
+                if (this.ticks >= preset06 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset06 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET07.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_7"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_7"));
+                if (this.ticks >= preset07 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset07 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET08.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_8"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_8"));
+                if (this.ticks >= preset08 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset08 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET09.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_9"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_9"));
+                if (this.ticks >= preset09 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset09 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
+            if (state.is(ModBlocks.REGEN_PRESET10.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_10"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_10"));
+                if (this.ticks >= preset10 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= preset10 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
+            }
 
-        if (state.is(ModBlocks.REGEN_IRON_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, ModBlocks.REGENED_IRON_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET01.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_1"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_1"));
+                if (this.ticks >= d_preset01 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset01 + 10) {
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_IRON_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_IRON_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET02.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_2"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_2"));
+                if (this.ticks >= d_preset02 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset02 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_COPPER_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, ModBlocks.REGENED_COPPER_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET03.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_3"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_3"));
+                if (this.ticks >= d_preset03 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset03 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_COPPER_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_COPPER_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET04.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_4"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_4"));
+                if (this.ticks >= d_preset04 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset04 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_GOLD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, ModBlocks.REGENED_GOLD_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET05.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_5"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_5"));
+                if (this.ticks >= d_preset05 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset05 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_GOLD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, ModBlocks.REGENED_IRON_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET06.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_6"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_6"));
+                if (this.ticks >= d_preset06 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset06 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_NETHER_GOLD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickNGold) {
-                this.level.setBlock(pos, ModBlocks.REGENED_NETHER_GOLD_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET07.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_7"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_7"));
+                if (this.ticks >= d_preset07 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset07 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_DIAMOND_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDiamond) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DIAMOND_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET08.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_8"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_8"));
+                if (this.ticks >= d_preset08 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset08 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_DIAMOND_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDDiamond) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_DIAMOND_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET09.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_9"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_9"));
+                if (this.ticks >= d_preset09 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset09 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_EMERALD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickEmerald) {
-                this.level.setBlock(pos, ModBlocks.REGENED_EMERALD_ORE.get().defaultBlockState(), 3);
+            if (state.is(ModBlocks.D_REGEN_PRESET10.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_10"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_10"));
+                if (this.ticks >= d_preset10 && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    testList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= d_preset10 + 10){
+                        this.level.setBlock(pos, Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                }
             }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_EMERALD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDEmerald) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_EMERALD_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_COAL_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickCoal) {
-                this.level.setBlock(pos, ModBlocks.REGENED_COAL_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_COAL_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDCoal) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_COAL_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_LAPIS_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickLapis) {
-                this.level.setBlock(pos, ModBlocks.REGENED_LAPIS_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_LAPIS_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDLapis) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_LAPIS_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_REDSTONE_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickRedstone) {
-                this.level.setBlock(pos, ModBlocks.REGENED_REDSTONE_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_DEEPSLATE_REDSTONE_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDRedstone) {
-                this.level.setBlock(pos, ModBlocks.REGENED_DEEPSLATE_REDSTONE_ORE.get().defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.REGEN_NETHER_QUARTZ_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickNQuartz) {
-                this.level.setBlock(pos, ModBlocks.REGENED_NETHER_QUARTZ_ORE.get().defaultBlockState(), 3);
-            }
-        }
 
-//バニラ鉱石
-
-        if (state.is(ModBlocks.V_REGEN_IRON_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickIron) {
-                this.level.setBlock(pos, Blocks.IRON_ORE.defaultBlockState(), 3);
+                if (testList.isEmpty()) {
+                    testList.remove("regen_block_list");
             }
         }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_IRON_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDIron) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_IRON_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_COPPER_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickCopper) {
-                this.level.setBlock(pos, Blocks.COPPER_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_COPPER_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDCopper) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_GOLD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickGold) {
-                this.level.setBlock(pos, Blocks.GOLD_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_GOLD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDGold) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_NETHER_GOLD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickNGold) {
-                this.level.setBlock(pos, Blocks.NETHER_GOLD_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DIAMOND_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDiamond) {
-                this.level.setBlock(pos, Blocks.DIAMOND_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_DIAMOND_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDDiamond) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_DIAMOND_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_EMERALD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickEmerald) {
-                this.level.setBlock(pos, Blocks.EMERALD_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_EMERALD_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDEmerald) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_COAL_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickCoal) {
-                this.level.setBlock(pos, Blocks.COAL_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_COAL_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDCoal) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_COAL_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_LAPIS_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickLapis) {
-                this.level.setBlock(pos, Blocks.LAPIS_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_LAPIS_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDLapis) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_REDSTONE_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickRedstone) {
-                this.level.setBlock(pos, Blocks.REDSTONE_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_DEEPSLATE_REDSTONE_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickDRedstone) {
-                this.level.setBlock(pos, Blocks.DEEPSLATE_REDSTONE_ORE.defaultBlockState(), 3);
-            }
-        }
-        if (state.is(ModBlocks.V_REGEN_NETHER_QUARTZ_ORE_ENTITY.get())) {
-            if (this.ticks++ >= tickNQuartz) {
-                this.level.setBlock(pos, Blocks.NETHER_QUARTZ_ORE.defaultBlockState(), 3);
-            }
-        }
-
-        //TEST
-        if (state.is(ModBlocks.TEST_ORE.get())) {
-
-            RegenWorldTags worldTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
-                    RegenWorldTags::load,RegenWorldTags::new,"regen_world_tag"
-            );
-
-            CompoundTag testTag = worldTags.getDataTag();
-//            HolderLookup.RegistryLookup<Block> blockLookup = this.level.registryAccess().lookupOrThrow(Registries.BLOCK);
-            this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), testTag.getCompound("state_r"));
-            this.savedPos = NbtUtils.readBlockPos(testTag.getCompound("pos_r"));
-
-            if (this.ticks++ >= 50) {
-                this.level.setBlock(savedPos, savedState, 3);
-//                System.out.println(savedState);
-//                System.out.println(savedPos);
-            }
-        }
-
-//Create
-
-//        if (ModList.get().isLoaded("create")) {
-//            if (state.is(ModBlocks.CREATE_ZINC_ORE_ENTITY.get())) {
-//                if (this.ticks++ >= tickZinc) {
-//                    this.level.setBlock(pos, AllBlocks.ZINC_ORE.get().defaultBlockState(), 3);
-//                }
-//            }
-//            if (state.is(ModBlocks.CREATE_DEEPSLATE_ZINC_ORE_ENTITY.get())) {
-//                if (this.ticks++ >= tickDZinc) {
-//                    this.level.setBlock(pos, AllBlocks.DEEPSLATE_ZINC_ORE.get().defaultBlockState(), 3);
-//                }
-//            }
-//        }
-
-//Mekanism
-
-//        if (ModList.get().isLoaded("mekanism")) {
-//            if (state.is(ModBlocks.MEKANISM_TIN_ORE_ENTITY.get())) {
-//                if (this.ticks++ >= tickZinc) {
-//                    this.level.setBlock(pos, MekanismBlocks.ORES.get(OreType.TIN).stoneBlock().defaultBlockState(), 3);
-//                }
-//            }
-//            if (state.is(ModBlocks.MEKANISM_DEEPSLATE_TIN_ORE_ENTITY.get())) {
-//                if (this.ticks++ >= tickDZinc) {
-//                    this.level.setBlock(pos, MekanismBlocks.ORES.get(OreType.TIN).deepslateBlock().defaultBlockState(), 3);
-//                }
-//            }
-//        }
     }
 
     @Override
     public int ticker() {
-        return ticks++;
+        return ticks;
     }
-
-
 
     @Nullable
     @Override

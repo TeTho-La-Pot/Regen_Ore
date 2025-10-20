@@ -1,12 +1,4 @@
 {
   "values": [
-    "re_ore:regened_gold_ore",
-    "re_ore:regened_deepslate_gold_ore",
-    "re_ore:regened_diamond_ore",
-    "re_ore:regened_deepslate_diamond_ore",
-    "re_ore:regened_emerald_ore",
-    "re_ore:regened_deepslate_emerald_ore",
-    "re_ore:regened_redstone_ore",
-    "re_ore:regened_deepslate_redstone_ore"
   ]
 }
