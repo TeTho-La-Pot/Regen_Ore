@@ -2,7 +2,7 @@
 このソースコードはMinecraft ver.1.20.1のMOD用です。
 
 # Download
-## CurseForge
+### CurseForge
 https://legacy.curseforge.com/minecraft/mc-mods/regen_ore
 
 # Contents description
