@@ -13,6 +13,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +21,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static com.guithub.TeThoLaPot.reore.item.Items.TORE;
 
 
 @Mod.EventBusSubscriber(modid = RE_Ore.MOD_ID)
@@ -43,7 +46,7 @@ public class RegenBreakEvent extends ModBlocks{
         }
 
         if (!player.isCreative()) {
-            if (offHand.isEmpty() || offHand.getTag().getInt("mode") == 0 || offHand.getTag() == null) {
+            if (!offHand.is(TORE.get()) || offHand.getTag().getInt("mode") == 0) {
                 if (state.is(RegenTags.Blocks.CAN_REGEN)){
 //                    if (state.is(ModBlocks.REGEN_PRESET01.get())){
 //                        level.setBlock(pos, ModBlocks.REGEN_PRESET01.get().defaultBlockState(), 3);
@@ -810,6 +813,16 @@ public class RegenBreakEvent extends ModBlocks{
                     event.setCanceled(true);
                 }
 
+                //破壊時の耐久値減少の処理
+                if (!mainHand.isEmpty() && mainHand.isDamageableItem() && state.is(RegenTags.Blocks.DONE_REGEN)){
+                    if (mainHand.getItem() instanceof DiggerItem){
+                        mainHand.hurtAndBreak(1, event.getPlayer(),(player1) -> {
+                            player.broadcastBreakEvent(event.getPlayer().getUsedItemHand());
+                        });
+                    }
+                }
+
+                //
             } else if (offHand.getTag().getInt("mode") == 1){
                 if (RegenTickUtils.isCanRegen(levelAccessor.getBlockState(pos)) || RegenTickUtils.isDoneRegen(levelAccessor.getBlockState(pos))) {
                     if (mainHand.isCorrectToolForDrops(state)) {

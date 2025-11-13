@@ -27,10 +27,10 @@ public class ReOreDataGen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookUpProvider = event.getLookupProvider();
 
-        generator.addProvider(event.includeClient(), new ReOreItemModelProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ReOreBlockStateProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ENUSLangProvider(packOutput));
-        generator.addProvider(event.includeClient(), ReOreLootTables.create(packOutput));
-        generator.addProvider(event.includeServer(), new ReOreBlockTagsProvider(packOutput, lookUpProvider, existingFileHelper));
+//        generator.addProvider(event.includeClient(), new ReOreItemModelProvider(packOutput, existingFileHelper));
+//        generator.addProvider(event.includeClient(), new ReOreBlockStateProvider(packOutput, existingFileHelper));
+//        generator.addProvider(event.includeClient(), new ENUSLangProvider(packOutput));
+//        generator.addProvider(event.includeClient(), ReOreLootTables.create(packOutput));
+//        generator.addProvider(event.includeServer(), new ReOreBlockTagsProvider(packOutput, lookUpProvider, existingFileHelper));
     }
 }

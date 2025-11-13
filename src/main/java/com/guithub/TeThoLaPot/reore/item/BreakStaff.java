@@ -4,10 +4,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import javax.annotation.Nullable;
 
 
 public class BreakStaff extends Item {
@@ -44,5 +46,18 @@ public class BreakStaff extends Item {
     public boolean isFoil(ItemStack stack) {
         if (modeNum(stack) == 0) {return false;}
         return true;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (!level.isClientSide) {
+            // サーバーサイドでのみ実行
+            if (stack.getTag() == null) {
+                stack.setTag(new CompoundTag());
+                // ここでデフォルトのNBTデータを設定するなど、必要な更新処理を行う
+                stack.getTag().putInt("mode", 0);
+                // 更新後、クライアントに同期される (詳細はモッディングフレームワーク依存)
+            }
+        }
     }
 }

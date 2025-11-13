@@ -3,6 +3,7 @@ package com.guithub.TeThoLaPot.reore.util;
 import com.guithub.TeThoLaPot.reore.config.RegenOreCommonConfig;
 
 public class RegenCooldownUtils {
+    
 
     public static float preset01 = RegenOreCommonConfig.REGEN_PRESET_01.get();
     public static float preset02 = RegenOreCommonConfig.REGEN_PRESET_02.get();

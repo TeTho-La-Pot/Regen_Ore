@@ -6,6 +6,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
+import java.awt.*;
+
 public class RegenTags {
     public static class Blocks{
         public static final TagKey<Block> CAN_REGEN = tag("can_regen");
