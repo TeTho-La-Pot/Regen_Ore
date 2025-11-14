@@ -2,8 +2,6 @@ package com.guithub.TeThoLaPot.reore.jade;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
-import com.guithub.TeThoLaPot.reore.init.entity.RegenOreEntity;
-import com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils;
 import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -16,8 +14,7 @@ import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.*;
-import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.n_preset10;
+import static com.guithub.TeThoLaPot.reore.util.RegenWorkUtils.*;
 
 public enum RegenTickComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     INSTANCE;

@@ -1,7 +1,6 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
-import com.guithub.TeThoLaPot.reore.tag.RegenTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -18,9 +17,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
-import static com.guithub.TeThoLaPot.reore.util.RegenCooldownUtils.*;
+import static com.guithub.TeThoLaPot.reore.util.RegenWorkUtils.*;
 
 public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
     private int ticks;

@@ -1,10 +1,13 @@
 package com.guithub.TeThoLaPot.reore.tag;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
 
@@ -12,6 +15,8 @@ public class RegenTags {
     public static class Blocks{
         public static final TagKey<Block> CAN_REGEN = tag("can_regen");
         public static final TagKey<Block> DONE_REGEN = tag("done_regen");
+
+        //Presets
         public static final TagKey<Block> PRESET_01 = tag("preset01");
         public static final TagKey<Block> PRESET_02 = tag("preset02");
         public static final TagKey<Block> PRESET_03 = tag("preset03");
@@ -48,5 +53,15 @@ public class RegenTags {
             return BlockTags.create(new ResourceLocation(RE_Ore.MOD_ID, name));
         }
 
+
+    }
+
+    public static class Dimensions{
+
+        public static final TagKey<Level> REGEN_DIMENSION = dimensionTag("regen_dimension");
+
+        private static TagKey<Level> dimensionTag(String name){
+            return TagKey.create(Registries.DIMENSION, new ResourceLocation(RE_Ore.MOD_ID, name));
+        }
     }
 }
