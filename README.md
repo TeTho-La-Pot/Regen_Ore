@@ -1,6 +1,9 @@
 # RegenOre
 このソースコードはMinecraft ver.1.20.1のMOD用です。
 
+# Wiki
+https://github.com/TeTho-La-Pot/Regen_Ore/wiki
+
 # Download
 ## MOD
 ### CurseForge
