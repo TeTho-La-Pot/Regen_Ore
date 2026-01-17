@@ -51,12 +51,9 @@ public class BreakStaff extends Item {
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (!level.isClientSide) {
-            // サーバーサイドでのみ実行
             if (stack.getTag() == null) {
                 stack.setTag(new CompoundTag());
-                // ここでデフォルトのNBTデータを設定するなど、必要な更新処理を行う
                 stack.getTag().putInt("mode", 0);
-                // 更新後、クライアントに同期される (詳細はモッディングフレームワーク依存)
             }
         }
     }

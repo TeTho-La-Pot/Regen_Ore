@@ -1,6 +1,9 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
+import com.guithub.TeThoLaPot.reore.event.RegenOnblockEvent;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.block.RegenOreBlocks;
+import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -24,8 +27,6 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
     private int ticks;
     private BlockState savedState;
     private BlockPos savedPos;
-//    private BlockState savedState0;
-//    private BlockPos savedPos0;
 
     public RegenOreEntity(BlockPos Pos, BlockState State) {
         super(BlockEntities.REGEN_ORE_ENTITY.get(), Pos, State);
@@ -40,23 +41,25 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
         RegenWorldTags worldTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
                 RegenWorldTags::load,RegenWorldTags::new,"regen_world_tag");
 
-        ListTag testList = worldTags.getRegenBlockList();
+        ListTag regenList = worldTags.getRegenBlockList();
 
-        for (int i = testList.size() - 1; i >= 0; i--){
-            CompoundTag stateTag = testList.getCompound(i);
-            CompoundTag posTag = testList.getCompound(i);
+        for (int i = regenList.size() - 1; i >= 0; i--){
+            CompoundTag stateTag = regenList.getCompound(i);
+            CompoundTag posTag = regenList.getCompound(i);
 
         if (this.level == null || this.level.isClientSide()) {
             this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
             return;
         }
 
+
+
             if (state.is(ModBlocks.REGEN_PRESET01.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_1"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_1"));
                 if (this.ticks >= preset01 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset01 + 10) {
@@ -69,7 +72,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_2"));
                 if (this.ticks >= preset02 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset02 + 10){
@@ -82,7 +85,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_3"));
                 if (this.ticks >= preset03 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset03 + 10){
@@ -95,7 +98,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_4"));
                 if (this.ticks >= preset04 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset04 + 10){
@@ -108,7 +111,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_5"));
                 if (this.ticks >= preset05 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset05 + 10){
@@ -121,7 +124,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_6"));
                 if (this.ticks >= preset06 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset06 + 10){
@@ -134,7 +137,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_7"));
                 if (this.ticks >= preset07 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset07 + 10){
@@ -147,7 +150,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_8"));
                 if (this.ticks >= preset08 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset08 + 10){
@@ -160,7 +163,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_9"));
                 if (this.ticks >= preset09 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset09 + 10){
@@ -173,7 +176,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_10"));
                 if (this.ticks >= preset10 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= preset10 + 10){
@@ -187,7 +190,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_1"));
                 if (this.ticks >= d_preset01 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset01 + 10) {
@@ -200,7 +203,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_2"));
                 if (this.ticks >= d_preset02 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset02 + 10){
@@ -213,7 +216,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_3"));
                 if (this.ticks >= d_preset03 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset03 + 10){
@@ -226,7 +229,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_4"));
                 if (this.ticks >= d_preset04 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset04 + 10){
@@ -239,7 +242,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_5"));
                 if (this.ticks >= d_preset05 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset05 + 10){
@@ -252,7 +255,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_6"));
                 if (this.ticks >= d_preset06 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset06 + 10){
@@ -265,7 +268,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_7"));
                 if (this.ticks >= d_preset07 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset07 + 10){
@@ -278,7 +281,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_8"));
                 if (this.ticks >= d_preset08 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset08 + 10){
@@ -291,7 +294,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_9"));
                 if (this.ticks >= d_preset09 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset09 + 10){
@@ -304,7 +307,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_10"));
                 if (this.ticks >= d_preset10 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= d_preset10 + 10){
@@ -318,7 +321,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_1"));
                 if (this.ticks >= n_preset01 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset01 + 10) {
@@ -331,7 +334,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_2"));
                 if (this.ticks >= n_preset02 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset02 + 10) {
@@ -344,7 +347,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_3"));
                 if (this.ticks >= n_preset03 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset03 + 10) {
@@ -357,7 +360,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_4"));
                 if (!(this.ticks < n_preset04) && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset04 + 10) {
@@ -370,7 +373,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_5"));
                 if (this.ticks >= n_preset05 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset05 + 10) {
@@ -383,7 +386,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_6"));
                 if (this.ticks >= n_preset06 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset06 + 10) {
@@ -396,7 +399,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_7"));
                 if (this.ticks >= n_preset07 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset07 + 10) {
@@ -409,7 +412,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_8"));
                 if (this.ticks >= n_preset08 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset08 + 10) {
@@ -422,7 +425,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_9"));
                 if (this.ticks >= n_preset09 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset09 + 10) {
@@ -435,7 +438,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_10"));
                 if (this.ticks >= n_preset10 && pos.equals(savedPos)) {
                     this.level.setBlock(pos, savedState, 3);
-                    testList.remove(i);
+                    regenList.remove(i);
                     this.setChanged();
                 }else {
                     if (this.ticks >= n_preset10 + 10) {
@@ -444,8 +447,14 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 }
             }
 
-                if (testList.isEmpty()) {
-                    testList.remove("regen_block_list");
+            OnblockWorldTags onBolckTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
+                    OnblockWorldTags::load, OnblockWorldTags::new, "onblock_world_tag"
+            );
+            onBolckTags.setFlag(pos, false);
+
+
+                if (regenList.isEmpty()) {
+                    regenList.remove("regen_block_list");
             }
         }
     }

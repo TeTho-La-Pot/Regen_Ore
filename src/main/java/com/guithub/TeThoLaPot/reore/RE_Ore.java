@@ -5,6 +5,8 @@ import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.init.entity.BlockEntities;
 import com.guithub.TeThoLaPot.reore.item.CreativeModTabs;
 import com.guithub.TeThoLaPot.reore.item.Items;
+import com.guithub.TeThoLaPot.reore.util.NaturalFlagFeature;
+import com.guithub.TeThoLaPot.reore.util.RegenFeatures;
 import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -51,7 +53,8 @@ public class RE_Ore {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, RegenOreCommonConfig.SPEC, "RegenOre.toml");
 
-        ModList.get().isLoaded("create");
+        RegenFeatures.register(modEventBus);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
