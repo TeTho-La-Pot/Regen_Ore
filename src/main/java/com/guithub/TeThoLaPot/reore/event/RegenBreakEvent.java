@@ -75,7 +75,6 @@ public class RegenBreakEvent extends ModBlocks {
                     level.removeBlock(pos, false);
                 }
             } else if (onBolckTags.getFlag(pos) == false || onBolckTags == null) {
-                System.out.println("PLACED_CREATIVE");
                 if (!offHand.is(TORE.get()) || offHand.getTag().getInt("mode") == 0) {
                     if (state.is(RegenTags.Blocks.CAN_REGEN)) {
                         event.setCanceled(true);
