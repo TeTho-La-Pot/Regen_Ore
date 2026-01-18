@@ -16,25 +16,22 @@ public abstract class LevelMixin {
     private void onSetBlock(BlockPos pos, BlockState newState, int flags, int recursion, CallbackInfoReturnable<Boolean> cir) {
         Level level = (Level) (Object) this;
 
-        // 1. クライアントサイドおよび、サーバーがまだ準備できていない（初期生成中）場合は除外
         if (level.isClientSide || level.getServer() == null || !level.getServer().isReady()) {
             return;
         }
 
-        // 2. ピストンによる移動処理（Flag 64）での呼び出しを除外
-        // PistonMoveMixin で別途「データの引っ越し」を管理しているため、ここで新規付与してはいけない
         if ((flags & 64) != 0) {
             return;
         }
+
+        BlockState oldState = level.getBlockState(pos);
 
         OnblockWorldTags data = level.getServer().overworld().getDataStorage()
                 .computeIfAbsent(OnblockWorldTags::load, OnblockWorldTags::new, "onblock_world_tag");
 
         if (newState.isAir()) {
-            // 空気（破壊）される場合はフラグを削除
             data.removeFlag(pos);
-        } else {
-            // それ以外（プレイヤー設置、コマンド、他MODの設置）はフラグを付与
+        } else if (oldState.getBlock() != newState.getBlock()){
             data.setFlag(pos, true);
         }
     }
