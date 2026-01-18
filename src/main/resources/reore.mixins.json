@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.guithub.TeThoLaPot.reore.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "reore.refmap.json",
+  "mixins": [
+    "PistonMoveMixin",
+    "LevelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
