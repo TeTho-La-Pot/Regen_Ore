@@ -3,8 +3,12 @@ package com.guithub.TeThoLaPot.reore.util;
 import com.guithub.TeThoLaPot.reore.config.RegenOreCommonConfig;
 
 public class RegenWorkUtils {
-    
 
+//    Systems
+    public static boolean can_natural_regen = RegenOreCommonConfig.CAN_NATURAL_REGEN.get();
+
+//  Presets
+//  Normal
     public static float preset01 = RegenOreCommonConfig.REGEN_PRESET_01.get();
     public static float preset02 = RegenOreCommonConfig.REGEN_PRESET_02.get();
     public static float preset03 = RegenOreCommonConfig.REGEN_PRESET_03.get();
@@ -16,6 +20,7 @@ public class RegenWorkUtils {
     public static float preset09 = RegenOreCommonConfig.REGEN_PRESET_09.get();
     public static float preset10 = RegenOreCommonConfig.REGEN_PRESET_10.get();
 
+//    Deepslate
     public static float d_preset01 = RegenOreCommonConfig.D_REGEN_PRESET_01.get();
     public static float d_preset02 = RegenOreCommonConfig.D_REGEN_PRESET_02.get();
     public static float d_preset03 = RegenOreCommonConfig.D_REGEN_PRESET_03.get();
@@ -27,6 +32,7 @@ public class RegenWorkUtils {
     public static float d_preset09 = RegenOreCommonConfig.D_REGEN_PRESET_09.get();
     public static float d_preset10 = RegenOreCommonConfig.D_REGEN_PRESET_10.get();
 
+//    Netherrack
     public static float n_preset01 = RegenOreCommonConfig.N_REGEN_PRESET_01.get();
     public static float n_preset02 = RegenOreCommonConfig.N_REGEN_PRESET_02.get();
     public static float n_preset03 = RegenOreCommonConfig.N_REGEN_PRESET_03.get();

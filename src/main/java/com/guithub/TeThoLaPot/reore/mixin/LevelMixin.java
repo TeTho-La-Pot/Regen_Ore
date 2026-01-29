@@ -1,6 +1,7 @@
 package com.guithub.TeThoLaPot.reore.mixin;
 
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
+import com.guithub.TeThoLaPot.reore.tag.RegenTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,23 +17,25 @@ public abstract class LevelMixin {
     private void onSetBlock(BlockPos pos, BlockState newState, int flags, int recursion, CallbackInfoReturnable<Boolean> cir) {
         Level level = (Level) (Object) this;
 
-        if (level.isClientSide || level.getServer() == null || !level.getServer().isReady()) {
-            return;
-        }
+        if (level.getBlockState(pos).is(RegenTags.Blocks.DONE_REGEN) || level.getBlockState(pos).is(RegenTags.Blocks.CAN_REGEN)) {
+            if (level.isClientSide || level.getServer() == null || !level.getServer().isReady()) {
+                return;
+            }
 
-        if ((flags & 64) != 0) {
-            return;
-        }
+            boolean isMoving = (flags & 64) != 0;
 
-        BlockState oldState = level.getBlockState(pos);
+            BlockState oldState = level.getBlockState(pos);
 
-        OnblockWorldTags data = level.getServer().overworld().getDataStorage()
-                .computeIfAbsent(OnblockWorldTags::load, OnblockWorldTags::new, "onblock_world_tag");
+            OnblockWorldTags data = level.getServer().overworld().getDataStorage()
+                    .computeIfAbsent(OnblockWorldTags::load, OnblockWorldTags::new, "onblock_world_tag");
 
-        if (newState.isAir()) {
-            data.removeFlag(pos);
-        } else if (oldState.getBlock() != newState.getBlock()){
-            data.setFlag(pos, true);
+            if (newState.isAir()) {
+                if (!isMoving) {
+                    data.removeFlag(pos);
+                }
+            } else if (oldState.getBlock() != newState.getBlock()) {
+                data.setFlag(pos, true);
+            }
         }
     }
 }

@@ -24,6 +24,10 @@ public class OnblockWorldTags extends SavedData {
         this.setDirty();
     }
 
+    public boolean hasFlag(BlockPos pos) {
+        return this.blockFlags.containsKey(pos);
+    }
+
     public static OnblockWorldTags load(CompoundTag nbt){
         OnblockWorldTags data = new OnblockWorldTags();
         ListTag list = nbt.getList("BlockFlags", Tag.TAG_COMPOUND);

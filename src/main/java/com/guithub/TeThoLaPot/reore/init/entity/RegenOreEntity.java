@@ -1,8 +1,6 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
-import com.guithub.TeThoLaPot.reore.event.RegenOnblockEvent;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
-import com.guithub.TeThoLaPot.reore.init.block.RegenOreBlocks;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
@@ -38,8 +36,12 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
 
         BlockState state = this.getBlockState();
         BlockPos pos = this.getBlockPos();
+
         RegenWorldTags worldTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
                 RegenWorldTags::load,RegenWorldTags::new,"regen_world_tag");
+        OnblockWorldTags onBolckTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
+                OnblockWorldTags::load, OnblockWorldTags::new, "onblock_world_tag"
+        );
 
         ListTag regenList = worldTags.getRegenBlockList();
 
@@ -51,8 +53,6 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
             this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
             return;
         }
-
-
 
             if (state.is(ModBlocks.REGEN_PRESET01.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_1"));
@@ -447,11 +447,11 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 }
             }
 
-            OnblockWorldTags onBolckTags = ((ServerLevel) level).getDataStorage().computeIfAbsent(
-                    OnblockWorldTags::load, OnblockWorldTags::new, "onblock_world_tag"
-            );
-            onBolckTags.setFlag(pos, false);
-
+            if (onBolckTags.hasFlag(pos) == true){
+                onBolckTags.setFlag(pos, false);
+            } else {
+                onBolckTags.removeFlag(pos);
+            }
 
                 if (regenList.isEmpty()) {
                     regenList.remove("regen_block_list");
