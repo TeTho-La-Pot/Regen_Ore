@@ -1,8 +1,13 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
+import com.guithub.TeThoLaPot.reore.config.RegenOreCommonConfig;
 import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.packet.OnBlockTagPacket;
+import com.guithub.TeThoLaPot.reore.packet.RegenNetworkHandler;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
+import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
+import com.guithub.TeThoLaPot.reore.util.RegenWorkUtils;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -449,13 +454,14 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
 
             if (onBolckTags.hasFlag(pos) == true){
                 onBolckTags.setFlag(pos, false);
-            } else {
-                onBolckTags.removeFlag(pos);
+                RegenNetworkHandler.sendToAll(new OnBlockTagPacket(pos, false));
             }
 
-                if (regenList.isEmpty()) {
-                    regenList.remove("regen_block_list");
+            if (regenList.isEmpty()) {
+                regenList.remove("regen_block_list");
             }
+
+
         }
     }
 

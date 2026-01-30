@@ -1,8 +1,12 @@
 package com.guithub.TeThoLaPot.reore.mixin;
 
+import com.guithub.TeThoLaPot.reore.packet.OnBlockTagPacket;
+import com.guithub.TeThoLaPot.reore.packet.RegenNetworkHandler;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenTags;
+import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,9 +36,13 @@ public abstract class LevelMixin {
             if (newState.isAir()) {
                 if (!isMoving) {
                     data.removeFlag(pos);
+                    RegenNetworkHandler.sendToAll(new OnBlockTagPacket(pos, true));
                 }
             } else if (oldState.getBlock() != newState.getBlock()) {
                 data.setFlag(pos, true);
+                RegenNetworkHandler.sendToAll(new OnBlockTagPacket(pos, true));
+
+
             }
         }
     }

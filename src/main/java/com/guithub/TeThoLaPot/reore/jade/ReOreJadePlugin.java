@@ -20,6 +20,6 @@ public class ReOreJadePlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(RegenTickComponentProvider.INSTANCE, Block.class);
-    }
 
+    }
 }

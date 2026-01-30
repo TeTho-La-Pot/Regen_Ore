@@ -82,858 +82,861 @@ public class RegenBreakEvent extends ModBlocks {
 
                 if (player.isCreative()) {
                     if (RegenTickUtils.isCanRegen(levelAccessor.getBlockState(pos)) || RegenTickUtils.isDoneRegen(levelAccessor.getBlockState(pos))) {
-                        level.removeBlock(pos, false);
+                        return;
                     }
                 } else if (onBolckTags.getFlag(pos) == false) {
-                    if ((RegenWorkUtils.can_natural_regen == false && onBolckTags.hasFlag(pos) == false)) {
+                    if (RegenWorkUtils.can_natural_regen == false && onBolckTags.hasFlag(pos) == false) {
                         return;
-                    } else {
+                    }
                         if (!offHand.is(TORE.get()) || offHand.getTag().getInt("mode") == 0) {
                             if (state.is(RegenTags.Blocks.CAN_REGEN)) {
                                 event.setCanceled(true);
                             }
                             int Y = pos.getY();
 
-                            if (state.is(RegenTags.Blocks.PRESET_01)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_01.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_01.get();
-                                if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                if (state.is(RegenTags.Blocks.PRESET_01)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_01.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_01.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    newRegenTag.put("state_1", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_1", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        newRegenTag.put("state_1", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_1", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
+
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET01.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET01.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_02)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_02.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_02.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_02)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_02.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_02.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_2", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_2", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_2", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_2", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET02.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET02.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_03)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_03.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_03.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_03)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_03.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_03.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_3", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_3", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_3", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_3", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET03.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET03.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_04)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_04.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_04.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_04)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_04.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_04.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_4", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_4", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_4", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_4", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET04.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET04.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_05)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_05.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_05.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_05)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_05.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_05.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_5", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_5", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_5", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_5", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET05.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET05.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_06)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_06.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_06.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_06)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_06.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_06.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_6", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_6", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_6", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_6", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET06.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET06.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_07)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_07.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_07.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_07)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_07.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_07.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_7", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_7", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_7", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_7", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET07.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET07.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_08)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_08.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_08.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_08)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_08.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_08.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_8", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_8", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_8", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_8", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET08.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET08.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_09)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_09.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_09.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_09)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_09.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_09.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_9", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_9", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_9", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_9", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET09.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET09.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.PRESET_10)) {
-                                int max = RegenOreCommonConfig.MAX_HEIGHT_10.get();
-                                int min = RegenOreCommonConfig.MIN_HEIGHT_10.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.PRESET_10)) {
+                                    int max = RegenOreCommonConfig.MAX_HEIGHT_10.get();
+                                    int min = RegenOreCommonConfig.MIN_HEIGHT_10.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("state_10", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("pos_10", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("state_10", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("pos_10", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.REGEN_PRESET10.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.REGEN_PRESET10.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_01)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_01.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_01.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_01)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_01.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_01.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_1", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_1", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_1", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_1", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET01.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET01.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_02)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_02.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_02.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_02)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_02.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_02.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_2", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_2", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_2", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_2", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET02.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET02.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_03)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_03.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_03.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_03)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_03.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_03.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_3", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_3", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_3", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_3", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET03.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET03.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_04)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_04.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_04.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_04)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_04.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_04.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_4", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_4", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_4", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_4", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET04.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET04.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_05)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_05.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_05.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_05)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_05.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_05.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_5", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_5", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_5", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_5", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET05.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET05.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_06)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_06.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_06.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_06)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_06.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_06.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_6", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_6", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_6", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_6", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET06.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET06.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_07)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_07.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_07.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_07)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_07.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_07.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_7", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_7", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_7", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_7", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET07.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET07.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_08)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_08.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_08.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_08)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_08.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_08.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_8", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_8", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_8", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_8", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET08.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET08.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_09)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_09.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_09.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_09)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_09.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_09.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_9", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_9", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_9", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_9", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET09.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET09.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.D_PRESET_10)) {
-                                int max = RegenOreCommonConfig.D_MAX_HEIGHT_10.get();
-                                int min = RegenOreCommonConfig.D_MIN_HEIGHT_10.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.D_PRESET_10)) {
+                                    int max = RegenOreCommonConfig.D_MAX_HEIGHT_10.get();
+                                    int min = RegenOreCommonConfig.D_MIN_HEIGHT_10.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("d_state_10", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("d_pos_10", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("d_state_10", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("d_pos_10", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET10.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.D_REGEN_PRESET10.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_01)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_01.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_01.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_01)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_01.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_01.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_1", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_1", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_1", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_1", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET01.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET01.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_02)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_02.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_02.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_02)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_02.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_02.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_2", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_2", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_2", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_2", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET02.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET02.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_03)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_03.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_03.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_03)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_03.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_03.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_3", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_3", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_3", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_3", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET03.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET03.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_04)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_04.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_04.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_04)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_04.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_04.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_4", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_4", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_4", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_4", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET04.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET04.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_05)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_05.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_05.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_05)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_05.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_05.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_5", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_5", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_5", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_5", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET05.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET05.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_06)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_06.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_06.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_06)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_06.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_06.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_6", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_6", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_6", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_6", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET06.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET06.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_07)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_07.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_07.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_07)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_07.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_07.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_7", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_7", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_7", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_7", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET07.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET07.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_08)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_08.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_08.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_08)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_08.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_08.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_8", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_8", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_8", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_8", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET08.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET08.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_09)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_09.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_09.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_09)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_09.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_09.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_9", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_9", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_9", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_9", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET09.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET09.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
-                            if (state.is(RegenTags.Blocks.N_PRESET_10)) {
-                                int max = RegenOreCommonConfig.N_MAX_HEIGHT_10.get();
-                                int min = RegenOreCommonConfig.N_MIN_HEIGHT_10.get();
-                                if (Y <= max && Y >= min) {
+                                if (state.is(RegenTags.Blocks.N_PRESET_10)) {
+                                    int max = RegenOreCommonConfig.N_MAX_HEIGHT_10.get();
+                                    int min = RegenOreCommonConfig.N_MIN_HEIGHT_10.get();
+                                    if (Y <= max && Y >= min) {
 
-                                    CompoundTag currentRegenTag = worldTags.getDataTag();
-                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+                                        CompoundTag currentRegenTag = worldTags.getDataTag();
+                                        ListTag regenlistTag = worldTags.getRegenBlockList();
 
-                                    newRegenTag.put("n_state_10", NbtUtils.writeBlockState(state));
-                                    newRegenTag.put("n_pos_10", NbtUtils.writeBlockPos(pos));
-                                    regenlistTag.add(newRegenTag);
+                                        newRegenTag.put("n_state_10", NbtUtils.writeBlockState(state));
+                                        newRegenTag.put("n_pos_10", NbtUtils.writeBlockPos(pos));
+                                        regenlistTag.add(newRegenTag);
 
-                                    worldTags.setDataTag(currentRegenTag);
-                                    worldTags.setRegenBlockList(regenlistTag);
+                                        worldTags.setDataTag(currentRegenTag);
+                                        worldTags.setRegenBlockList(regenlistTag);
 
-                                    if (mainHand.isCorrectToolForDrops(state)) {
-                                        for (ItemStack stack : drops) {
-                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
-                                            itemEntity.setNoPickUpDelay();
-                                            level.addFreshEntity(itemEntity);
+                                        if (mainHand.isCorrectToolForDrops(state)) {
+                                            for (ItemStack stack : drops) {
+                                                ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                                itemEntity.setNoPickUpDelay();
+                                                level.addFreshEntity(itemEntity);
+                                            }
+                                            state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
-                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                        level.removeBlock(pos, false);
+                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET10.get().defaultBlockState(), 3);
+                                        event.setCanceled(true);
                                     }
-                                    level.removeBlock(pos, false);
-                                    level.setBlock(pos, ModBlocks.N_REGEN_PRESET10.get().defaultBlockState(), 3);
-                                    event.setCanceled(true);
                                 }
-                            }
+
+                                onBolckTags.setFlag(pos, false);
 
                         } else if (offHand.getTag().getInt("mode") == 1) {
                             if (RegenTickUtils.isCanRegen(levelAccessor.getBlockState(pos)) || RegenTickUtils.isDoneRegen(levelAccessor.getBlockState(pos))) {
@@ -948,8 +951,6 @@ public class RegenBreakEvent extends ModBlocks {
                             }
                             level.removeBlock(pos, false);
                         }
-
-                    }
                 }
                 //破壊時の耐久値減少の処理
                 if (!mainHand.isEmpty() && mainHand.isDamageableItem() && state.is(RegenTags.Blocks.DONE_REGEN)) {
@@ -959,7 +960,6 @@ public class RegenBreakEvent extends ModBlocks {
                         });
                     }
                 }
-
                 if (onBolckTags.getFlag(pos) == true) {
                     onBolckTags.removeFlag(pos);
                 }

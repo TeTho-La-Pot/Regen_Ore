@@ -5,6 +5,8 @@ import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
 import com.guithub.TeThoLaPot.reore.init.entity.BlockEntities;
 import com.guithub.TeThoLaPot.reore.item.CreativeModTabs;
 import com.guithub.TeThoLaPot.reore.item.Items;
+import com.guithub.TeThoLaPot.reore.packet.OnBlockTagPacket;
+import com.guithub.TeThoLaPot.reore.packet.RegenNetworkHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -48,6 +50,7 @@ public class RE_Ore {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(RegenNetworkHandler::register);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {

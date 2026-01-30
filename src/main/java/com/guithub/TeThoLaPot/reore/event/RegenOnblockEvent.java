@@ -3,6 +3,8 @@ package com.guithub.TeThoLaPot.reore.event;
 import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenTags;
+import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
+import com.guithub.TeThoLaPot.reore.util.RegenWorkUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,6 +33,13 @@ public class RegenOnblockEvent {
         if (event.getEntity() instanceof ServerPlayer player && state.is(RegenTags.Blocks.DONE_REGEN)) {
             boolean isPlaced = !player.isCreative();
             onBolckTags.setFlag(pos, isPlaced);
+
+
+            if (isPlaced) {
+                RegenTickUtils.updateFlag(pos, true);
+            } else {
+                RegenTickUtils.updateFlag(pos, false);
+            }
         }
     }
 }

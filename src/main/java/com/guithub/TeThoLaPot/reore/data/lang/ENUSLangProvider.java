@@ -27,5 +27,6 @@ public class ENUSLangProvider extends LanguageProvider {
         //Jade
         add("config.jade.plugin_re_ore.regen_tick", "Regen Time");
         add("re_ore.regen", "RegenCooldown: %s");
+        add("re_ore.can_regen", "Regenerate");
     }
 }

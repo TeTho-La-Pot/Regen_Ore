@@ -33,5 +33,7 @@
   "config.jade.plugin_re_ore.regen_tick": "Regen Time",
   "creativetab.reore_tab": "Regen Ore",
   "item.re_ore.tore": "Raw Test Ore",
-  "re_ore.regen": "RegenCooldown: %s"
+  "re_ore.regen": "Cooldown: %s",
+  "re_ore.can_regen": "Regenerate: %s",
+  "re_ore.regen_block": "Block: %s"
 }
