@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "re_ore:item/break_stuff_off"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "re_ore:mode": 1.0
+      },
+      "model": "re_ore:item/break_stuff_on"
+    }
+  ]
+}

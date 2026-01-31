@@ -1,13 +1,16 @@
 package com.guithub.TeThoLaPot.reore;
 
 import com.guithub.TeThoLaPot.reore.config.RegenOreCommonConfig;
-import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.block.Re_Blocks;
 import com.guithub.TeThoLaPot.reore.init.entity.BlockEntities;
+import com.guithub.TeThoLaPot.reore.item.BreakStuff;
 import com.guithub.TeThoLaPot.reore.item.CreativeModTabs;
-import com.guithub.TeThoLaPot.reore.item.Items;
-import com.guithub.TeThoLaPot.reore.packet.OnBlockTagPacket;
+import com.guithub.TeThoLaPot.reore.item.Re_Items;
 import com.guithub.TeThoLaPot.reore.packet.RegenNetworkHandler;
+import com.guithub.TeThoLaPot.reore.recipe.ReLootModifiers;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,11 +36,13 @@ public class RE_Ore {
 
         CreativeModTabs.register(modEventBus);
 
-        Items.register(modEventBus);
+        Re_Items.register(modEventBus);
 
-        ModBlocks.register(modEventBus);
+        Re_Blocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+
+        modEventBus.addListener(this::onClientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -46,6 +51,8 @@ public class RE_Ore {
         BlockEntities.BLOCK_ENTITIES.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, RegenOreCommonConfig.SPEC, "RegenOre.toml");
+
+        ReLootModifiers.register(modEventBus);
 
     }
 
@@ -57,6 +64,20 @@ public class RE_Ore {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
         }
     }
+
+    private void onClientSetup(final FMLClientSetupEvent event){
+        event.enqueueWork(() -> {
+            ItemProperties.register(Re_Items.BreakStuff.get(),
+                    new ResourceLocation("re_ore", "mode"),
+                    (stack, level, entity, seed) -> {
+                if (stack.getItem() instanceof BreakStuff item) {
+                    return (float) item.modeNum(stack);
+                }
+                return 0.0f;
+                    });
+        });
+    }
+
 
 
     @SubscribeEvent

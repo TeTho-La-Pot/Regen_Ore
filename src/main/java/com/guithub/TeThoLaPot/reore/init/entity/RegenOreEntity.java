@@ -1,13 +1,10 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
-import com.guithub.TeThoLaPot.reore.config.RegenOreCommonConfig;
-import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.block.Re_Blocks;
 import com.guithub.TeThoLaPot.reore.packet.OnBlockTagPacket;
 import com.guithub.TeThoLaPot.reore.packet.RegenNetworkHandler;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
-import com.guithub.TeThoLaPot.reore.util.RegenTickUtils;
-import com.guithub.TeThoLaPot.reore.util.RegenWorkUtils;
 import com.guithub.TeThoLaPot.reore.util.TickaleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -59,7 +56,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
             return;
         }
 
-            if (state.is(ModBlocks.REGEN_PRESET01.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET01.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_1"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_1"));
                 if (this.ticks >= preset01 && pos.equals(savedPos)) {
@@ -72,7 +69,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                         }
                     }
                 }
-            if (state.is(ModBlocks.REGEN_PRESET02.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET02.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_2"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_2"));
                 if (this.ticks >= preset02 && pos.equals(savedPos)) {
@@ -85,7 +82,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET03.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET03.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_3"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_3"));
                 if (this.ticks >= preset03 && pos.equals(savedPos)) {
@@ -98,7 +95,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET04.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET04.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_4"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_4"));
                 if (this.ticks >= preset04 && pos.equals(savedPos)) {
@@ -111,7 +108,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET05.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET05.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_5"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_5"));
                 if (this.ticks >= preset05 && pos.equals(savedPos)) {
@@ -124,7 +121,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET06.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET06.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_6"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_6"));
                 if (this.ticks >= preset06 && pos.equals(savedPos)) {
@@ -137,7 +134,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET07.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET07.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_7"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_7"));
                 if (this.ticks >= preset07 && pos.equals(savedPos)) {
@@ -150,7 +147,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET08.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET08.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_8"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_8"));
                 if (this.ticks >= preset08 && pos.equals(savedPos)) {
@@ -163,7 +160,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET09.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET09.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_9"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_9"));
                 if (this.ticks >= preset09 && pos.equals(savedPos)) {
@@ -176,7 +173,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.REGEN_PRESET10.get())) {
+            if (state.is(Re_Blocks.REGEN_PRESET10.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_10"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_10"));
                 if (this.ticks >= preset10 && pos.equals(savedPos)) {
@@ -190,7 +187,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 }
             }
 
-            if (state.is(ModBlocks.D_REGEN_PRESET01.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET01.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_1"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_1"));
                 if (this.ticks >= d_preset01 && pos.equals(savedPos)) {
@@ -203,7 +200,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET02.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET02.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_2"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_2"));
                 if (this.ticks >= d_preset02 && pos.equals(savedPos)) {
@@ -216,7 +213,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET03.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET03.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_3"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_3"));
                 if (this.ticks >= d_preset03 && pos.equals(savedPos)) {
@@ -229,7 +226,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET04.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET04.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_4"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_4"));
                 if (this.ticks >= d_preset04 && pos.equals(savedPos)) {
@@ -242,7 +239,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET05.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET05.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_5"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_5"));
                 if (this.ticks >= d_preset05 && pos.equals(savedPos)) {
@@ -255,7 +252,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET06.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET06.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_6"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_6"));
                 if (this.ticks >= d_preset06 && pos.equals(savedPos)) {
@@ -268,7 +265,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET07.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET07.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_7"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_7"));
                 if (this.ticks >= d_preset07 && pos.equals(savedPos)) {
@@ -281,7 +278,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET08.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET08.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_8"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_8"));
                 if (this.ticks >= d_preset08 && pos.equals(savedPos)) {
@@ -294,7 +291,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET09.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET09.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_9"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_9"));
                 if (this.ticks >= d_preset09 && pos.equals(savedPos)) {
@@ -307,7 +304,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.D_REGEN_PRESET10.get())) {
+            if (state.is(Re_Blocks.D_REGEN_PRESET10.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_10"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_10"));
                 if (this.ticks >= d_preset10 && pos.equals(savedPos)) {
@@ -321,7 +318,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                 }
             }
 
-            if (state.is(ModBlocks.N_REGEN_PRESET01.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET01.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_1"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_1"));
                 if (this.ticks >= n_preset01 && pos.equals(savedPos)) {
@@ -334,7 +331,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET02.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET02.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_2"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_2"));
                 if (this.ticks >= n_preset02 && pos.equals(savedPos)) {
@@ -347,7 +344,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET03.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET03.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_3"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_3"));
                 if (this.ticks >= n_preset03 && pos.equals(savedPos)) {
@@ -360,7 +357,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET04.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET04.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_4"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_4"));
                 if (!(this.ticks < n_preset04) && pos.equals(savedPos)) {
@@ -373,7 +370,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET05.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET05.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_5"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_5"));
                 if (this.ticks >= n_preset05 && pos.equals(savedPos)) {
@@ -386,7 +383,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET06.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET06.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_6"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_6"));
                 if (this.ticks >= n_preset06 && pos.equals(savedPos)) {
@@ -399,7 +396,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET07.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET07.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_7"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_7"));
                 if (this.ticks >= n_preset07 && pos.equals(savedPos)) {
@@ -412,7 +409,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET08.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET08.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_8"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_8"));
                 if (this.ticks >= n_preset08 && pos.equals(savedPos)) {
@@ -425,7 +422,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET09.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET09.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_9"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_9"));
                 if (this.ticks >= n_preset09 && pos.equals(savedPos)) {
@@ -438,7 +435,7 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
-            if (state.is(ModBlocks.N_REGEN_PRESET10.get())) {
+            if (state.is(Re_Blocks.N_REGEN_PRESET10.get())) {
                 this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_10"));
                 this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_10"));
                 if (this.ticks >= n_preset10 && pos.equals(savedPos)) {
@@ -451,6 +448,20 @@ public class RegenOreEntity extends BlockEntity implements TickaleBlockEntity {
                     }
                 }
             }
+            if (state.is(Re_Blocks.DEBRIS_REGEN_PRESET.get())) {
+                this.savedState = NbtUtils.readBlockState(this.level.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("debris_state"));
+                this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("debris_pos"));
+                if (this.ticks >= debris_preset && pos.equals(savedPos)) {
+                    this.level.setBlock(pos, savedState, 3);
+                    regenList.remove(i);
+                    this.setChanged();
+                }else {
+                    if (this.ticks >= debris_preset + 10) {
+                        this.level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState(), 3);
+                    }
+                }
+            }
+
 
             if (onBolckTags.hasFlag(pos) == true){
                 onBolckTags.setFlag(pos, false);

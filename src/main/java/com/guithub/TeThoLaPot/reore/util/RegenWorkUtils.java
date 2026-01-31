@@ -6,6 +6,7 @@ public class RegenWorkUtils {
 
 //    Systems
     public static boolean can_natural_regen = RegenOreCommonConfig.CAN_NATURAL_REGEN.get();
+    public static boolean enable_change_ancient_debris_drops = RegenOreCommonConfig.ENABLE_CHANGE_ANCIENT_DEBRIS_DROPS.get();
 
 //  Presets
 //  Normal
@@ -43,4 +44,6 @@ public class RegenWorkUtils {
     public static float n_preset08 = RegenOreCommonConfig.N_REGEN_PRESET_08.get();
     public static float n_preset09 = RegenOreCommonConfig.N_REGEN_PRESET_09.get();
     public static float n_preset10 = RegenOreCommonConfig.N_REGEN_PRESET_10.get();
+
+    public static float debris_preset = RegenOreCommonConfig.DEBRIS_REGEN_PRESET.get();
 }

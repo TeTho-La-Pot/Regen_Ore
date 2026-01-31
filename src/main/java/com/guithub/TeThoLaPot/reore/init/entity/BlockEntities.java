@@ -1,9 +1,8 @@
 package com.guithub.TeThoLaPot.reore.init.entity;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
-import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.block.Re_Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -17,37 +16,38 @@ public class BlockEntities {
                     () -> BlockEntityType.Builder.of(RegenOreEntity::new,
 
                             //TEST
-                            ModBlocks.TEST_ORE.get(),
-                            ModBlocks.REGEN_PRESET01.get(),
-                            ModBlocks.REGEN_PRESET02.get(),
-                            ModBlocks.REGEN_PRESET03.get(),
-                            ModBlocks.REGEN_PRESET04.get(),
-                            ModBlocks.REGEN_PRESET05.get(),
-                            ModBlocks.REGEN_PRESET06.get(),
-                            ModBlocks.REGEN_PRESET07.get(),
-                            ModBlocks.REGEN_PRESET08.get(),
-                            ModBlocks.REGEN_PRESET09.get(),
-                            ModBlocks.REGEN_PRESET10.get(),
-                            ModBlocks.D_REGEN_PRESET01.get(),
-                            ModBlocks.D_REGEN_PRESET02.get(),
-                            ModBlocks.D_REGEN_PRESET03.get(),
-                            ModBlocks.D_REGEN_PRESET04.get(),
-                            ModBlocks.D_REGEN_PRESET05.get(),
-                            ModBlocks.D_REGEN_PRESET06.get(),
-                            ModBlocks.D_REGEN_PRESET07.get(),
-                            ModBlocks.D_REGEN_PRESET08.get(),
-                            ModBlocks.D_REGEN_PRESET09.get(),
-                            ModBlocks.D_REGEN_PRESET10.get(),
-                            ModBlocks.N_REGEN_PRESET01.get(),
-                            ModBlocks.N_REGEN_PRESET02.get(),
-                            ModBlocks.N_REGEN_PRESET03.get(),
-                            ModBlocks.N_REGEN_PRESET04.get(),
-                            ModBlocks.N_REGEN_PRESET05.get(),
-                            ModBlocks.N_REGEN_PRESET06.get(),
-                            ModBlocks.N_REGEN_PRESET07.get(),
-                            ModBlocks.N_REGEN_PRESET08.get(),
-                            ModBlocks.N_REGEN_PRESET09.get(),
-                            ModBlocks.N_REGEN_PRESET10.get()
+                            Re_Blocks.TEST_ORE.get(),
+                            Re_Blocks.REGEN_PRESET01.get(),
+                            Re_Blocks.REGEN_PRESET02.get(),
+                            Re_Blocks.REGEN_PRESET03.get(),
+                            Re_Blocks.REGEN_PRESET04.get(),
+                            Re_Blocks.REGEN_PRESET05.get(),
+                            Re_Blocks.REGEN_PRESET06.get(),
+                            Re_Blocks.REGEN_PRESET07.get(),
+                            Re_Blocks.REGEN_PRESET08.get(),
+                            Re_Blocks.REGEN_PRESET09.get(),
+                            Re_Blocks.REGEN_PRESET10.get(),
+                            Re_Blocks.D_REGEN_PRESET01.get(),
+                            Re_Blocks.D_REGEN_PRESET02.get(),
+                            Re_Blocks.D_REGEN_PRESET03.get(),
+                            Re_Blocks.D_REGEN_PRESET04.get(),
+                            Re_Blocks.D_REGEN_PRESET05.get(),
+                            Re_Blocks.D_REGEN_PRESET06.get(),
+                            Re_Blocks.D_REGEN_PRESET07.get(),
+                            Re_Blocks.D_REGEN_PRESET08.get(),
+                            Re_Blocks.D_REGEN_PRESET09.get(),
+                            Re_Blocks.D_REGEN_PRESET10.get(),
+                            Re_Blocks.N_REGEN_PRESET01.get(),
+                            Re_Blocks.N_REGEN_PRESET02.get(),
+                            Re_Blocks.N_REGEN_PRESET03.get(),
+                            Re_Blocks.N_REGEN_PRESET04.get(),
+                            Re_Blocks.N_REGEN_PRESET05.get(),
+                            Re_Blocks.N_REGEN_PRESET06.get(),
+                            Re_Blocks.N_REGEN_PRESET07.get(),
+                            Re_Blocks.N_REGEN_PRESET08.get(),
+                            Re_Blocks.N_REGEN_PRESET09.get(),
+                            Re_Blocks.N_REGEN_PRESET10.get(),
+                            Re_Blocks.DEBRIS_REGEN_PRESET.get()
 
                             ).build(null));
 

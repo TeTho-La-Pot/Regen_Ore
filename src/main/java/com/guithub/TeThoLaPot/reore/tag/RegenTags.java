@@ -44,6 +44,7 @@ public class RegenTags {
         public static final TagKey<Block> N_PRESET_08 = tag("n_preset08");
         public static final TagKey<Block> N_PRESET_09 = tag("n_preset09");
         public static final TagKey<Block> N_PRESET_10 = tag("n_preset10");
+        public static final TagKey<Block> DEBRIS_PRESET = tag("debris_preset");
 
 
         private static TagKey<Block> tag(String name){

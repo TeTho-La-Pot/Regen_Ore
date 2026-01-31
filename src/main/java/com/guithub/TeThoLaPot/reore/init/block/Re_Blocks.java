@@ -1,13 +1,11 @@
 package com.guithub.TeThoLaPot.reore.init.block;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
-import com.guithub.TeThoLaPot.reore.item.Items;
-import net.minecraft.util.valueproviders.UniformInt;
+import com.guithub.TeThoLaPot.reore.item.Re_Items;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -16,7 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+public class Re_Blocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, RE_Ore.MOD_ID);
 
@@ -117,6 +115,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> N_REGEN_PRESET10 = registerBlock("n_regen_preset10",
             () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.STONE).noLootTable()));
 
+    public static final RegistryObject<Block> DEBRIS_REGEN_PRESET = registerBlock("debris_regen_preset",
+            () -> new RegenOreBlocks(BlockBehaviour.Properties.copy(Blocks.ANCIENT_DEBRIS).noLootTable()));
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name,toReturn);
@@ -124,7 +125,7 @@ public class ModBlocks {
     }
 
     private  static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return Items.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        return Re_Items.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus) {

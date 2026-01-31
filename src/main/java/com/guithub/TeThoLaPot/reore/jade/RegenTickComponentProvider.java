@@ -1,7 +1,7 @@
 package com.guithub.TeThoLaPot.reore.jade;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
-import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.block.Re_Blocks;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
@@ -17,7 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -95,7 +94,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
 
             if (accessor.getBlockEntity() instanceof TickaleBlockEntity tickale) {
 
-                if (state.is(ModBlocks.REGEN_PRESET01.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET01.get())) {
                     data.putInt("Tick", (int) (100 / preset01 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_1"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_1"));
@@ -104,7 +103,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET02.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET02.get())) {
                     data.putInt("Tick", (int) (100 / preset02 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_2"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_2"));
@@ -113,10 +112,10 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET03.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET03.get())) {
                     data.putInt("Tick", (int) (100 / preset03 * tickale.ticker()));
                 }
-                if (state.is(ModBlocks.REGEN_PRESET04.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET04.get())) {
                     data.putInt("Tick", (int) (100 / preset04 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_4"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_4"));
@@ -125,7 +124,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET05.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET05.get())) {
                     data.putInt("Tick", (int) (100 / preset05 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_5"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_5"));
@@ -134,7 +133,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET06.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET06.get())) {
                     data.putInt("Tick", (int) (100 / preset06 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_6"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_6"));
@@ -143,7 +142,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET07.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET07.get())) {
                     data.putInt("Tick", (int) (100 / preset07 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_7"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_7"));
@@ -152,7 +151,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET08.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET08.get())) {
                     data.putInt("Tick", (int) (100 / preset08 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_8"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_8"));
@@ -161,7 +160,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET09.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET09.get())) {
                     data.putInt("Tick", (int) (100 / preset09 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_9"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_9"));
@@ -170,7 +169,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.REGEN_PRESET10.get())) {
+                if (state.is(Re_Blocks.REGEN_PRESET10.get())) {
                     data.putInt("Tick", (int) (100 / preset10 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("state_10"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("pos_10"));
@@ -179,7 +178,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET01.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET01.get())) {
                     data.putInt("Tick", (int) (100 / d_preset01 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_1"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_1"));
@@ -188,7 +187,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET02.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET02.get())) {
                     data.putInt("Tick", (int) (100 / d_preset02 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_2"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_2"));
@@ -197,7 +196,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET03.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET03.get())) {
                     data.putInt("Tick", (int) (100 / d_preset03 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_3"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_3"));
@@ -206,7 +205,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET04.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET04.get())) {
                     data.putInt("Tick", (int) (100 / d_preset04 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_4"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_4"));
@@ -215,7 +214,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET05.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET05.get())) {
                     data.putInt("Tick", (int) (100 / d_preset05 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_5"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_5"));
@@ -224,7 +223,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET06.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET06.get())) {
                     data.putInt("Tick", (int) (100 / d_preset06 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_6"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_6"));
@@ -233,7 +232,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET07.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET07.get())) {
                     data.putInt("Tick", (int) (100 / d_preset07 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_7"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_7"));
@@ -242,7 +241,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET08.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET08.get())) {
                     data.putInt("Tick", (int) (100 / d_preset08 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_8"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_8"));
@@ -251,7 +250,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET09.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET09.get())) {
                     data.putInt("Tick", (int) (100 / d_preset09 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_9"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_9"));
@@ -260,7 +259,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.D_REGEN_PRESET10.get())) {
+                if (state.is(Re_Blocks.D_REGEN_PRESET10.get())) {
                     data.putInt("Tick", (int) (100 / d_preset10 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("d_state_10"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("d_pos_10"));
@@ -269,7 +268,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET01.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET01.get())) {
                     data.putInt("Tick", (int) (100 / n_preset01 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_1"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_1"));
@@ -278,7 +277,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET02.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET02.get())) {
                     data.putInt("Tick", (int) (100 / n_preset02 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_2"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_2"));
@@ -287,7 +286,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET03.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET03.get())) {
                     data.putInt("Tick", (int) (100 / n_preset03 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_3"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_3"));
@@ -296,7 +295,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET04.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET04.get())) {
                     data.putInt("Tick", (int) (100 / n_preset04 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_4"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_4"));
@@ -305,7 +304,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET05.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET05.get())) {
                     data.putInt("Tick", (int) (100 / n_preset05 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_5"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_5"));
@@ -314,7 +313,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET06.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET06.get())) {
                     data.putInt("Tick", (int) (100 / n_preset06 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_6"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_6"));
@@ -323,7 +322,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET07.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET07.get())) {
                     data.putInt("Tick", (int) (100 / n_preset07 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_7"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_7"));
@@ -332,7 +331,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET08.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET08.get())) {
                     data.putInt("Tick", (int) (100 / n_preset08 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_8"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_8"));
@@ -341,7 +340,7 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET09.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET09.get())) {
                     data.putInt("Tick", (int) (100 / n_preset09 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_9"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_9"));
@@ -350,10 +349,19 @@ public enum RegenTickComponentProvider implements IBlockComponentProvider, IServ
                         data.putString("regen_block", blockName);
                     }
                 }
-                if (state.is(ModBlocks.N_REGEN_PRESET10.get())) {
+                if (state.is(Re_Blocks.N_REGEN_PRESET10.get())) {
                     data.putInt("Tick", (int) (100 / n_preset10 * tickale.ticker()));
                     this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("n_state_10"));
                     this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("n_pos_10"));
+                    String blockName = savedState.getBlock().getName().getString();
+                    if (pos.equals(savedPos)) {
+                        data.putString("regen_block", blockName);
+                    }
+                }
+                if (state.is(Re_Blocks.DEBRIS_REGEN_PRESET.get())) {
+                    data.putInt("Tick", (int) (100 / debris_preset * tickale.ticker()));
+                    this.savedState = NbtUtils.readBlockState(serverLevel.registryAccess().lookupOrThrow(Registries.BLOCK), stateTag.getCompound("debris_state"));
+                    this.savedPos = NbtUtils.readBlockPos(posTag.getCompound("debris_pos"));
                     String blockName = savedState.getBlock().getName().getString();
                     if (pos.equals(savedPos)) {
                         data.putString("regen_block", blockName);

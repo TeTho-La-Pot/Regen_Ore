@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "re_ore:item/tore"
+    "layer0": "re_ore:item/ancient_fragment"
   }
 }

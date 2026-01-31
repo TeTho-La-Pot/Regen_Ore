@@ -2,7 +2,7 @@ package com.guithub.TeThoLaPot.reore.event;
 
 import com.guithub.TeThoLaPot.reore.RE_Ore;
 import com.guithub.TeThoLaPot.reore.config.RegenOreCommonConfig;
-import com.guithub.TeThoLaPot.reore.init.block.ModBlocks;
+import com.guithub.TeThoLaPot.reore.init.block.Re_Blocks;
 import com.guithub.TeThoLaPot.reore.tag.OnblockWorldTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenTags;
 import com.guithub.TeThoLaPot.reore.tag.RegenWorldTags;
@@ -31,12 +31,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-import static com.guithub.TeThoLaPot.reore.item.Items.TORE;
-import static com.ibm.icu.impl.ValidIdentifiers.Datatype.x;
+import static com.guithub.TeThoLaPot.reore.item.Re_Items.BreakStuff;
 
 
 @Mod.EventBusSubscriber(modid = RE_Ore.MOD_ID)
-public class RegenBreakEvent extends ModBlocks {
+public class RegenBreakEvent extends Re_Blocks {
     private BlockState pState;
     private BlockPos pPos;
 
@@ -88,7 +87,7 @@ public class RegenBreakEvent extends ModBlocks {
                     if (RegenWorkUtils.can_natural_regen == false && onBolckTags.hasFlag(pos) == false) {
                         return;
                     }
-                        if (!offHand.is(TORE.get()) || offHand.getTag().getInt("mode") == 0) {
+                        if (!offHand.is(BreakStuff.get()) || offHand.getTag().getInt("mode") == 0) {
                             if (state.is(RegenTags.Blocks.CAN_REGEN)) {
                                 event.setCanceled(true);
                             }
@@ -119,7 +118,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET01.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET01.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -147,7 +146,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET02.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET02.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -175,7 +174,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET03.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET03.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -203,7 +202,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET04.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET04.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -231,7 +230,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET05.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET05.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -259,7 +258,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET06.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET06.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -287,7 +286,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET07.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET07.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -315,7 +314,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET08.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET08.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -343,7 +342,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET09.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET09.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -371,7 +370,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.REGEN_PRESET10.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.REGEN_PRESET10.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -399,7 +398,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET01.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET01.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -427,7 +426,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET02.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET02.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -455,7 +454,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET03.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET03.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -483,7 +482,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET04.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET04.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -511,7 +510,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET05.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET05.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -539,7 +538,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET06.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET06.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -567,7 +566,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET07.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET07.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -595,7 +594,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET08.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET08.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -623,7 +622,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET09.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET09.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -651,7 +650,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.D_REGEN_PRESET10.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.D_REGEN_PRESET10.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -679,7 +678,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET01.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET01.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -707,7 +706,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET02.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET02.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -735,7 +734,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET03.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET03.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -763,7 +762,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET04.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET04.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -791,7 +790,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET05.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET05.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -819,7 +818,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET06.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET06.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -847,7 +846,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET07.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET07.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -875,7 +874,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET08.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET08.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -903,7 +902,7 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET09.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET09.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
@@ -931,10 +930,38 @@ public class RegenBreakEvent extends ModBlocks {
                                             state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
                                         }
                                         level.removeBlock(pos, false);
-                                        level.setBlock(pos, ModBlocks.N_REGEN_PRESET10.get().defaultBlockState(), 3);
+                                        level.setBlock(pos, Re_Blocks.N_REGEN_PRESET10.get().defaultBlockState(), 3);
                                         event.setCanceled(true);
                                     }
                                 }
+                                if (state.is(RegenTags.Blocks.DEBRIS_PRESET)) {
+                                int max = RegenOreCommonConfig.DEBRIS_MAX_HEIGHT.get();
+                                int min = RegenOreCommonConfig.DEBRIS_MIN_HEIGHT.get();
+                                if (Y <= max && Y >= min) {
+
+                                    CompoundTag currentRegenTag = worldTags.getDataTag();
+                                    ListTag regenlistTag = worldTags.getRegenBlockList();
+
+                                    newRegenTag.put("debris_state", NbtUtils.writeBlockState(state));
+                                    newRegenTag.put("debris_pos", NbtUtils.writeBlockPos(pos));
+                                    regenlistTag.add(newRegenTag);
+
+                                    worldTags.setDataTag(currentRegenTag);
+                                    worldTags.setRegenBlockList(regenlistTag);
+
+                                    if (mainHand.isCorrectToolForDrops(state)) {
+                                        for (ItemStack stack : drops) {
+                                            ItemEntity itemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack);
+                                            itemEntity.setNoPickUpDelay();
+                                            level.addFreshEntity(itemEntity);
+                                        }
+                                        state.getBlock().popExperience(level, player.getOnPos(), event.getExpToDrop());
+                                    }
+                                    level.removeBlock(pos, false);
+                                    level.setBlock(pos, Re_Blocks.DEBRIS_REGEN_PRESET.get().defaultBlockState(), 3);
+                                    event.setCanceled(true);
+                                }
+                            }
 
                                 onBolckTags.setFlag(pos, false);
 
