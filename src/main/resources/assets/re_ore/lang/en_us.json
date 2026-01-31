@@ -36,7 +36,7 @@
   "item.re_ore.break_stuff": "Break Stuff",
   "tooltip.re_ore.break_stuff_on": "Mode : §aON",
   "tooltip.re_ore.break_stuff_off": "Mode : §cOFF",
-  "tooltip.re_ore.break_stuff_description": "Stuff of removing regenerate ore.\n [%s]+[%s] can be used to switch Mode.",
+  "tooltip.re_ore.break_stuff_description": "Stuff of removing regenerate ore.\n You can destroy blocks while holding it in your off-hand.\n [%s]+[%s] can be used to switch Mode.",
   "item.re_ore.ancient_fragment": "Ancient Fragment",
   "re_ore.regen": "Cooldown: %s",
   "re_ore.can_regen": "Regenerate: %s",

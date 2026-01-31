@@ -36,7 +36,7 @@
   "item.re_ore.break_stuff": "破壊装置",
   "tooltip.re_ore.break_stuff_on": "モード : §aON",
   "tooltip.re_ore.break_stuff_off": "モード : §cOFF",
-  "tooltip.re_ore.break_stuff_description": "再生する鉱石を撤去するためのツール\n [%s]+[%s] でモード切り変え",
+  "tooltip.re_ore.break_stuff_description": "再生する鉱石を撤去するためのツール\n オフハンドに持った状態でブロックを壊すことができる\n [%s]+[%s] でモード切り変え",
   "item.re_ore.ancient_fragment": "古代の破片",
   "re_ore.regen": "クールタイム: %s",
   "re_ore.can_regen": "再生: %s",
