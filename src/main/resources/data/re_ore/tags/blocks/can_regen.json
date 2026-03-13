@@ -32,6 +32,16 @@
     "re_ore:n_regen_preset08",
     "re_ore:n_regen_preset09",
     "re_ore:n_regen_preset10",
+    "re_ore:e_regen_preset01",
+    "re_ore:e_regen_preset02",
+    "re_ore:e_regen_preset03",
+    "re_ore:e_regen_preset04",
+    "re_ore:e_regen_preset05",
+    "re_ore:e_regen_preset06",
+    "re_ore:e_regen_preset07",
+    "re_ore:e_regen_preset08",
+    "re_ore:e_regen_preset09",
+    "re_ore:e_regen_preset10",
     "re_ore:debris_regen_preset"
   ]
 }

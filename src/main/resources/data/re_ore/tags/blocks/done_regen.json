@@ -31,6 +31,16 @@
     "#re_ore:n_preset08",
     "#re_ore:n_preset09",
     "#re_ore:n_preset10",
+    "#re_ore:e_preset01",
+    "#re_ore:e_preset02",
+    "#re_ore:e_preset03",
+    "#re_ore:e_preset04",
+    "#re_ore:e_preset05",
+    "#re_ore:e_preset06",
+    "#re_ore:e_preset07",
+    "#re_ore:e_preset08",
+    "#re_ore:e_preset09",
+    "#re_ore:e_preset10",
     "#re_ore:debris_preset"
   ]
 }
