@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "re_ore:block/e_regen_preset06"
+      "model": "regen_resources:block/e_regen_preset06"
     }
   }
 }

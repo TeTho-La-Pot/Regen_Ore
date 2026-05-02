@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "re_ore:block/debris_regen_preset"
+      "model": "regen_resources:block/debris_regen_preset"
     }
   }
 }

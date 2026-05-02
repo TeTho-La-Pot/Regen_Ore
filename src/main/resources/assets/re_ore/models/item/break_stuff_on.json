@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "re_ore:item/break_stuff_on"
+    "layer0": "regen_resources:item/break_stuff_on"
   }
 }

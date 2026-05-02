@@ -17,30 +17,28 @@ base {
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+
+mixin {
+    add sourceSets.main, "regen_resources.refmap.json"
+    config "regen_resources.mixins.json"
+}
+
 minecraft {
-
     mappings channel: mapping_channel, version: mapping_version
-
     copyIdeResources = true
 
-    mixin {
-        add sourceSets.main, "re_ore.refmap.json"
-        config "re_ore.mixins.json"
-    }
-
     runs {
-        // applies to all the run configs below
         configureEach {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
-            arg "-mixin.config=re_ore.mixins.json"
+            // 起動引数にMixinを登録
+            arg "-mixin.config=regen_resources.mixins.json"
 
             mods {
-                "${mod_id}" {
+                // 文字列展開せず直接記述が最も安定します
+                regen_resources {
                     source sourceSets.main
                 }
             }
@@ -48,102 +46,113 @@ minecraft {
 
         client {
             property 'forge.enabledGameTestNamespaces', mod_id
-
-            //Jade
+            // Jade表示のためのMixinリマップ設定
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
         }
 
         data {
             workingDirectory project.file('run-data')
-
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
         }
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources', 'src/generated/resources']
+        }
+    }
+}
+
 
 repositories {
+    maven { url = 'https://minecraftforge.net' }
+
     maven {
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
+        url "https://cursemaven.com"
+        content { includeGroup "curse.maven" }
     }
     maven {
         name = 'tterrag maven'
         url = 'https://maven.tterrag.com/'
     }
+    mavenCentral()
 }
-    dependencies {
-        minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("curse.maven:jade-324717:5876199")
-        annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+dependencies {
+    // 前提MOD TT_core
+    implementation fg.deobf(files('libs/tt_core-1.0.jar'))
+
+    // Minecraft & Forge
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Jade (Waila)
+    implementation fg.deobf("curse.maven:jade-324717:5876199")
+
+    // Mixinアノテーションプロセッサ
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+tasks.named('processResources', ProcessResources).configure {
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    var replaceProperties = [
+            minecraft_version   : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            forge_version       : forge_version,
+            forge_version_range : forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id              : mod_id,
+            mod_name            : mod_name,
+            mod_license         : mod_license,
+            mod_version         : mod_version,
+            mod_authors         : mod_authors,
+            mod_description     : mod_description
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
     }
+}
 
-    tasks.named('processResources', ProcessResources).configure {
-        var replaceProperties = [
-                minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
-                forge_version       : forge_version, forge_version_range: forge_version_range,
-                loader_version_range: loader_version_range,
-                mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-                mod_authors         : mod_authors, mod_description: mod_description,
-        ]
-        inputs.properties replaceProperties
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'MixinConfigs'            : "regen_resources.mixins.json"
+        ])
+    }
+    finalizedBy 'reobfJar'
+}
 
-        filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-            expand replaceProperties + [project: project]
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifact jar
         }
     }
-
-    tasks.named('jar', Jar).configure {
-        manifest {
-            attributes([
-                    'Specification-Title'     : mod_id,
-                    'Specification-Vendor'    : mod_authors,
-                    'Specification-Version'   : '1', // We are version 1 of ourselves
-                    'Implementation-Title'    : project.name,
-                    'Implementation-Version'  : project.jar.archiveVersion,
-                    'Implementation-Vendor'   : mod_authors,
-                    'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                    'MixinConfig'             : "re_ore.mixins.json"
-            ])
-        }
-
-        finalizedBy 'reobfJar'
-    }
-
-    publishing {
-        publications {
-            register('mavenJava', MavenPublication) {
-                artifact jar
-            }
-        }
-        repositories {
-            maven {
-                url "file://${project.projectDir}/mcmodsrepo"
-            }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
         }
     }
+}
 
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = 'UTF-8'
-    }
-
-    jar {
-        manifest {
-            attributes([
-                    "MixinConfigs": "re_ore.mixins.json"
-            ])
-        }
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "re_ore:block/test_ore"
+      "model": "regen_resources:block/test_ore"
     }
   }
 }

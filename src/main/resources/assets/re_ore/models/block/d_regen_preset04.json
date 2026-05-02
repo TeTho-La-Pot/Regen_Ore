@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "re_ore:block/deepslate_regen_ore"
+    "all": "regen_resources:block/deepslate_regen_ore"
   }
 }
